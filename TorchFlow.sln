@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorchFlow", "TorchFlow.csproj", "{2B54E24B-6F53-4B02-99D0-29434EF72989}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B54E24B-6F53-4B02-99D0-29434EF72989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B54E24B-6F53-4B02-99D0-29434EF72989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B54E24B-6F53-4B02-99D0-29434EF72989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B54E24B-6F53-4B02-99D0-29434EF72989}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E3BF42E-4B46-4BF4-BB37-E5ADDA2F06E1}
+	EndGlobalSection
+EndGlobal
