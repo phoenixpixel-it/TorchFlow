@@ -2,8 +2,27 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TorchFlow"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              StartupUri="MainWindow.xaml">
+    
+    
     <Application.Resources>
-         
+        
+        <!-- Plop this in your resource dictionary or your resource declaration -->
+        <Style x:Key="TheAwesomeXAMLimage" TargetType="ContentControl">
+            <!-- Add additional Setters Here -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+
+                        <!-- Just Paste your XAML here -->
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Now actually place it on your view -->
+
     </Application.Resources>
 </Application>

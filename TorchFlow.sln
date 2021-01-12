@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorchFlow", "TorchFlow.csproj", "{2B54E24B-6F53-4B02-99D0-29434EF72989}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorchFlow", "TorchFlow.csproj", "{DC61A60E-9E7F-4CC6-9479-DF7E18977D03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2B54E24B-6F53-4B02-99D0-29434EF72989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B54E24B-6F53-4B02-99D0-29434EF72989}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B54E24B-6F53-4B02-99D0-29434EF72989}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B54E24B-6F53-4B02-99D0-29434EF72989}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC61A60E-9E7F-4CC6-9479-DF7E18977D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC61A60E-9E7F-4CC6-9479-DF7E18977D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC61A60E-9E7F-4CC6-9479-DF7E18977D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC61A60E-9E7F-4CC6-9479-DF7E18977D03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9E3BF42E-4B46-4BF4-BB37-E5ADDA2F06E1}
+		SolutionGuid = {1C487848-A455-49C8-9B13-5E21E5D5DA48}
 	EndGlobalSection
 EndGlobal
