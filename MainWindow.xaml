@@ -10,13 +10,13 @@
         Background="Transparent"
         AllowsTransparency="True" ResizeMode="NoResize"
         ShowInTaskbar="False"
-        UseLayoutRounding="True" KeyDown="Window_KeyDown">
+        UseLayoutRounding="True" KeyDown="Window_KeyDown" Height="61">
     <Border CornerRadius="30" Background="#FF1F1F1F">
 
         <Grid>
 
             <ContentControl Style="{StaticResource TheAwesomeXAMLimage}"/>
-            <Button x:Name="search_button" BorderBrush="Transparent" Click="search_button_Click" Cursor="Hand" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Margin="40,10,0,10" BorderThickness="0">
+            <Button x:Name="search_button" BorderBrush="Transparent" Click="search_button_Click" Cursor="Hand" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Margin="36,16,709,19" BorderThickness="0">
                 <Button.Content>
                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                         <Canvas Name="svg41" Width="612.01" Height="612.01" Canvas.Left="0" Canvas.Top="0">
