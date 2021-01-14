@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -48,7 +49,6 @@ namespace TorchFlow
 
         public MainWindow()
         {
-            
             InitializeComponent();
             
             darker_background backg = new darker_background();                               // Show Background window 
@@ -60,6 +60,54 @@ namespace TorchFlow
             textbox_search.Focus();
             ResizeWindow();                                                                  // Resize MainWindow at 
             Topmost = true;                                                                  // App always on top
+
+
+
+            string[] args;
+
+            if (Environment.GetCommandLineArgs().Count() > 1)
+            {
+                // true
+                args = Environment.GetCommandLineArgs();
+
+
+                if (System.IO.File.Exists(args[1]))
+                { 
+                    // true
+                    if (System.IO.Path.GetExtension(args[1]) == ".tfext")
+                    {
+                        // true
+
+                    }
+                }
+            }
+
+
+
+            XmlDocument LoadConfig = new XmlDocument();
+
+            try
+            {
+                // try
+                LoadConfig.LoadXml(Properties.Resources.Config);
+
+
+                /*
+                 * 
+                 *      carica cose dal config
+                 *     che contiene info tipo percorsi e nomi di file
+                 *     :)
+
+
+                    ps. questo testo va rimosso in futuro ma non ora
+                 * 
+                 */
+            }
+            catch (Exception Ex)
+            {
+                // catch
+                MessageBox.Show(Ex.Message);
+            }
         }
         
         private void Window_KeyDown(object sender, KeyEventArgs e)
