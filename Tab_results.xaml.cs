@@ -22,6 +22,8 @@ namespace TorchFlow
         public Tab_results()
         {
             InitializeComponent();
+
+            Topmost = true;
         }
     }
 }

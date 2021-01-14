@@ -11,7 +11,8 @@
         AllowsTransparency="True" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        ShowInTaskbar="False">
+        ShowInTaskbar="False"
+        Padding="0,100,0,0">
     
     <Border CornerRadius="30" Background="#FF1F1F1F">
         
