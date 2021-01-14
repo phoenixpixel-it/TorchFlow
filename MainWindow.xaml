@@ -10,10 +10,13 @@
         Background="Transparent"
         AllowsTransparency="True" ResizeMode="NoResize"
         ShowInTaskbar="False"
-        UseLayoutRounding="True" KeyDown="Window_KeyDown" Height="61">
+        UseLayoutRounding="True" KeyDown="Window_KeyDown" Height="61" Closing="Window_Closing">
     <Border CornerRadius="30" Background="#FF1F1F1F">
 
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
             <ContentControl Style="{StaticResource TheAwesomeXAMLimage}"/>
             <Button x:Name="search_button" BorderBrush="Transparent" Click="search_button_Click" Cursor="Hand" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Margin="36,16,709,19" BorderThickness="0">
@@ -89,9 +92,7 @@
                     </TransformGroup>
                 </Separator.RenderTransform>
             </Separator>
-            <TextBox x:Name="textbox_search" HorizontalAlignment="Left" Height="24" Margin="94,18,0,0" VerticalAlignment="Top" Width="698" Background="Transparent" FontFamily="Roboto" TextWrapping="Wrap" FontSize="20" Foreground="#FFEAEAEA" BorderBrush="Transparent" BorderThickness="0" GotFocus="textbox_search_GotFocus" SelectionBrush="#FFD78900" Cursor="IBeam" UseLayoutRounding="True" CaretBrush="White" KeyDown="textbox_search_KeyDown">
-
-            </TextBox>
+            <TextBox x:Name="textbox_search" HorizontalAlignment="Left" Height="24" Margin="94,18,0,0" VerticalAlignment="Top" Width="654" Background="Transparent" FontFamily="Roboto" TextWrapping="Wrap" FontSize="20" Foreground="#FFEAEAEA" BorderBrush="Transparent" BorderThickness="0" GotFocus="textbox_search_GotFocus" SelectionBrush="#FFD78900" Cursor="IBeam" UseLayoutRounding="True" CaretBrush="White" KeyDown="textbox_search_KeyDown"/>
 
         </Grid>
     </Border>

@@ -1,19 +1,14 @@
-﻿<Window x:Class="TorchFlow.Tab_results"
+﻿<Window x:Class="TorchFlow.darker_background"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TorchFlow"
         mc:Ignorable="d"
-        Title="Tab_results" Height="450" Width="800"
+        Title="darker_background" Height="450" Width="800"
         WindowStyle="None"
-        Background="Transparent"
-        AllowsTransparency="True" 
-        ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"
-        ShowInTaskbar="False">
-    
-    <Border CornerRadius="30" Background="#FF1F1F1F">
+        Background="Transparent" GotFocus="Window_GotFocus" Closing="Window_Closing">
+    <Grid>
         
-    </Border>
+    </Grid>
 </Window>

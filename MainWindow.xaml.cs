@@ -48,25 +48,16 @@ namespace TorchFlow
 
         public MainWindow()
         {
-            var dark_background_window = new Window()                                        // Finder Dark background
-            {
-                Background = Brushes.Black,
-                Opacity = 0.4,
-                AllowsTransparency = true,
-                WindowStyle = WindowStyle.None,
-                WindowState = WindowState.Maximized,
-                Topmost = false
-            };
-            
-            dark_background_window.Show();
             
             InitializeComponent();
-            textbox_search.Focus();
-
-            textbox_search.Text = "Write here to search...";
             
+            darker_background backg = new darker_background();                               // Show Background window 
+            backg.Show();
 
+            Tab_results tabresults = new Tab_results();                                      // Show Tab Results
+            tabresults.Show();
 
+            textbox_search.Focus();
             ResizeWindow();                                                                  // Resize MainWindow at 
             Topmost = true;                                                                  // App always on top
         }
@@ -89,8 +80,12 @@ namespace TorchFlow
 
         private void search_button_Click(object sender, RoutedEventArgs e)
         {
-        
+            
         }
 
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            
+        }
     }
 }
