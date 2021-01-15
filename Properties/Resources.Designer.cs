@@ -63,10 +63,21 @@ namespace TorchFlow.Properties {
         /// <summary>
         ///   Cerca una stringa localizzata simile a &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;Config&gt;
+        ///
+        ///  &lt;DataFolder&gt;%MYDOC%&lt;/DataFolder&gt;
+        ///
+        ///  &lt;Settings&gt;
+        ///    &lt;Folder&gt;%MYDOCS%\TorchFlow&lt;/Folder&gt;
+        ///    &lt;FileName&gt;&lt;/FileName&gt;
+        ///    &lt;MaxValue&gt;&lt;/MaxValue&gt;
+        ///  &lt;/Settings&gt;
+        ///
         ///  &lt;Standard-Cmds&gt;
-        ///    &lt;FileName&gt;StandardCmds.xml&lt;/FileName&gt;
-        ///    &lt;IDMV&gt;2&lt;/IDMV&gt;
+        ///    &lt;Folder&gt;%MYDOC%\TorchFlow&lt;/Folder&gt;
+        ///    &lt;FileName&gt;&lt;/FileName&gt;
+        ///    &lt;MaxValue&gt;&lt;/MaxValue&gt;
         ///  &lt;/Standard-Cmds&gt;
+        ///  
         ///&lt;/Config&gt;.
         /// </summary>
         internal static string Config {

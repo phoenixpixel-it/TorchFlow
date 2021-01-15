@@ -23,6 +23,8 @@ using System.Windows.Interop;
 using GlobalHotKey;
 
 
+
+
 namespace TorchFlow
 {
     /// <summary>
@@ -30,20 +32,33 @@ namespace TorchFlow
     /// </summary>
     public partial class MainWindow : Window
     {
+        [System.Runtime.InteropServices.DllImport("user32.dll")]                             // Import user32.dll
+        public static extern void SetWindowText(int hWnd, String text);                      // Import user32.dll
 
         public void ResizeWindow()
         {
-            int height = 60;                                                                 // Resize Main Window Height
-            int width = 820;                                                                 // Resize Main Window Width
-            this.Width = width;
-            this.Height = height;
+            int main_window_height = 60;                                                     // Resize Main Window Height
+            int main_window_width = 820;                                                     // Resize Main Window Width
 
-            int button_search_height = height / 2;                                           // Resize Search Button Height
-            int button_search_width = height / 2;                                            // Resize Search Button Width
-            double button_search_margin_right = width / 1.12;
+            this.Width = main_window_width;
+            this.Height = main_window_height;
+
+            border_search.Width = main_window_width;                                         //Resize SearchBar Width
+
+            int border_search_height = 60;
+            border_search.Width = main_window_width;
+            border_search.Height = border_search_height;                                     //Resize SearchBar Height
+            
+            int button_search_height = border_search_height / 2;                             // Resize Search Button Height
+            int button_search_width = main_window_width / 2;                                 // Resize Search Button Width
+
+            double button_search_margin_right = main_window_width / 1.12;
             search_button.Width = button_search_width;
             search_button.Height = button_search_height;
             search_button.Margin = new Thickness(0, 10, button_search_margin_right, 10);     // Resize Search Button margins
+
+            search_tab.Width = main_window_width;                                            // Set search tab results Width
+            search_tab.Height = main_window_height * 10;                                     // Set search tab results Width
         }
 
 
@@ -54,64 +69,20 @@ namespace TorchFlow
             darker_background backg = new darker_background();                               // Show Background window 
             backg.Show();
 
-            Tab_results tabresults = new Tab_results();                                      // Show Tab Results
-            tabresults.Show();
-
-            textbox_search.Focus();
-            ResizeWindow();                                                                  // Resize MainWindow at 
+            textbox_search.Focus();                                                          // Click TextBox 
+            ResizeWindow();                                                                  // Go to "ResizeWindow() Function" 
             Topmost = true;                                                                  // App always on top
 
+            
+            LoadConfiguration loadconfiguration = new LoadConfiguration();
+            loadconfiguration.LoadConfigurationFiles();
 
-
-            string[] args;
-
-            if (Environment.GetCommandLineArgs().Count() > 1)
-            {
-                // true
-                args = Environment.GetCommandLineArgs();
-
-
-                if (System.IO.File.Exists(args[1]))
-                { 
-                    // true
-                    if (System.IO.Path.GetExtension(args[1]) == ".tfext")
-                    {
-                        // true
-
-                    }
-                }
-            }
-
-
-
-            XmlDocument LoadConfig = new XmlDocument();
-
-            try
-            {
-                // try
-                LoadConfig.LoadXml(Properties.Resources.Config);
-
-
-                /*
-                 * 
-                 *      carica cose dal config
-                 *     che contiene info tipo percorsi e nomi di file
-                 *     :)
-
-
-                    ps. questo testo va rimosso in futuro ma non ora
-                 * 
-                 */
-            }
-            catch (Exception Ex)
-            {
-                // catch
-                MessageBox.Show(Ex.Message);
-            }
+            search_tab.Effect.();        
         }
-        
+
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+
 
         }
 
@@ -131,9 +102,9 @@ namespace TorchFlow
             
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
+        public void Window_Closing(object sender, CancelEventArgs e)
         {
-            
+            Application.Current.Shutdown();                                                  // Close all windows (exit code=0)
         }
     }
 }
