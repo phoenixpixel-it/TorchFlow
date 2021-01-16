@@ -32,11 +32,18 @@ namespace TorchFlow
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        
+       
+
         [System.Runtime.InteropServices.DllImport("user32.dll")]                             // Import user32.dll
         public static extern void SetWindowText(int hWnd, String text);                      // Import user32.dll
+       
+
 
         public void ResizeWindow()
         {
+            // ResizeWindow()
             int main_window_height = 60;                                                     // Resize Main Window Height
             int main_window_width = 820;                                                     // Resize Main Window Width
 
@@ -48,63 +55,157 @@ namespace TorchFlow
             int border_search_height = 60;
             border_search.Width = main_window_width;
             border_search.Height = border_search_height;                                     //Resize SearchBar Height
-            
-            int button_search_height = border_search_height / 2;                             // Resize Search Button Height
-            int button_search_width = main_window_width / 2;                                 // Resize Search Button Width
 
-            double button_search_margin_right = main_window_width / 1.12;
+            double button_search_height = border_search_height / 2.40;                       // Resize Search Button Height
+            double button_search_width = button_search_height;                               // Resize Search Button Width
+
             search_button.Width = button_search_width;
             search_button.Height = button_search_height;
+
+            double button_search_margin_right = main_window_width / 1.12;
             search_button.Margin = new Thickness(0, 10, button_search_margin_right, 10);     // Resize Search Button margins
 
             search_tab.Width = main_window_width;                                            // Set search tab results Width
             search_tab.Height = main_window_height * 10;                                     // Set search tab results Width
         }
 
+        public string backgtext { get; private set; }                                        //Search string value
 
         public MainWindow()
         {
+            // MainWindow()
             InitializeComponent();
-            
+
+            string[] args = null;
+
+
+            if (Environment.GetCommandLineArgs().Count() > 1)
+            {
+                // true
+                args = Environment.GetCommandLineArgs();
+
+                if (System.IO.File.Exists(args[1]))
+                {
+                    // true
+                    if (System.IO.Path.GetExtension(args[1]) == ".tfext")
+                    {
+                        // True
+
+
+                        /*
+                         * 
+                         *  code to isntall extension
+                         * 
+                         */
+                    }
+                }
+                else
+                {
+                    // false
+
+                    /*
+                     * 
+                     *  code to do something with args
+                     * 
+                     */
+                }
+                
+                
+
+            }
+
             darker_background backg = new darker_background();                               // Show Background window 
             backg.Show();
 
-            textbox_search.Focus();                                                          // Click TextBox 
             ResizeWindow();                                                                  // Go to "ResizeWindow() Function" 
-            Topmost = true;                                                                  // App always on top
+            Topmost = true;
+            // App always on top
 
-            
-            LoadConfiguration loadconfiguration = new LoadConfiguration();
-            loadconfiguration.LoadConfigurationFiles();
+            backgtext = "Write here to search...";                                           // Background text textbox_search
+            textbox_search.Foreground = Brushes.Gray;                                        // Add Background color text
+            textbox_search.Text = backgtext;                                                 // Add Background Text
 
-            search_tab.Effect.();        
+            /*
+            // Load Config
+            LoadEvents LoadConfig = new LoadEvents();
+            LoadConfig.LoadConfigFile(true);
+
+
+            // Load Commands
+            Config CommandsData = new Config();
+
+            foreach (Config Find in LoadEvents.ConfigList)
+            {
+                // for each
+                if (Find.GetType() == typeof(Config))
+                {
+                    // true
+                    if (Find.Name == "COMMANDS")
+                    {
+                        // true
+                        LoadEvents LoadCommands = new LoadEvents();
+                        LoadCommands.CheckCommandsFile(Find.FolderName, Find.FileName, Convert.ToInt32(Find.MaxValue));
+                        LoadCommands.LoadCommandsFile(Find.FolderName, Find.FileName, Convert.ToInt32(Find.MaxValue), true);
+                    }
+                }
+            }
+
+
+            // Load Settings
+
+
+            /*
+             * 
+             * load settings??? 
+             * 
+             * 
+             */
+
+
         }
 
+        
+        
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            textbox_search.Foreground = Brushes.White;                                       // Set textbox color to white
+            backgtext = "";                                                                  // Set background text to ""
+            textbox_search.Focus();                                                          // Click Textbox
 
 
         }
 
         private void textbox_search_KeyDown(object sender, KeyEventArgs e)
         {
-
+            
         }
 
         private void textbox_search_GotFocus(object sender, RoutedEventArgs e)
         {
-           
-
+            textbox_search.Text = "";                                                        // Set Textbox_search to ""
         }
 
         private void search_button_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         public void Window_Closing(object sender, CancelEventArgs e)
         {
             Application.Current.Shutdown();                                                  // Close all windows (exit code=0)
         }
+
+        private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            
+            
+        }
+
+
     }
 }

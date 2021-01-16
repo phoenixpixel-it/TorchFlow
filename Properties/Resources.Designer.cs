@@ -62,27 +62,55 @@ namespace TorchFlow.Properties {
         
         /// <summary>
         ///   Cerca una stringa localizzata simile a &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;Commands&gt;
+        ///
+        ///  &lt;Prefix&gt;&lt;/Prefix&gt;
+        ///  
+        ///  &lt;IDs&gt;
+        ///    &lt;ID0&gt;&lt;/ID0&gt;
+        ///    &lt;ID1&gt;&lt;/ID1&gt;
+        ///    &lt;ID2&gt;&lt;/ID2&gt;
+        ///  &lt;/IDs&gt;
+        ///  
+        ///&lt;/Commands&gt;.
+        /// </summary>
+        internal static string Commands {
+            get {
+                return ResourceManager.GetString("Commands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;Config&gt;
-        ///
-        ///  &lt;DataFolder&gt;%MYDOC%&lt;/DataFolder&gt;
-        ///
+        ///  
         ///  &lt;Settings&gt;
-        ///    &lt;Folder&gt;%MYDOCS%\TorchFlow&lt;/Folder&gt;
-        ///    &lt;FileName&gt;&lt;/FileName&gt;
+        ///    &lt;FolderName&gt;%MYDOCS%\TorchFlow&lt;/FolderName&gt;
+        ///    &lt;FileName&gt;Settings.xml&lt;/FileName&gt;
         ///    &lt;MaxValue&gt;&lt;/MaxValue&gt;
         ///  &lt;/Settings&gt;
         ///
-        ///  &lt;Standard-Cmds&gt;
-        ///    &lt;Folder&gt;%MYDOC%\TorchFlow&lt;/Folder&gt;
-        ///    &lt;FileName&gt;&lt;/FileName&gt;
+        ///  &lt;Commands&gt;
+        ///    &lt;FolderName&gt;%MYDOCS%\TorchFlow&lt;/FolderName&gt;
+        ///    &lt;FileName&gt;Commands.xml&lt;/FileName&gt;
         ///    &lt;MaxValue&gt;&lt;/MaxValue&gt;
-        ///  &lt;/Standard-Cmds&gt;
+        ///  &lt;/Commands&gt;
         ///  
         ///&lt;/Config&gt;.
         /// </summary>
         internal static string Config {
             get {
                 return ResourceManager.GetString("Config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Byte[].
+        /// </summary>
+        internal static byte[] Ubuntu_Regular {
+            get {
+                object obj = ResourceManager.GetObject("Ubuntu_Regular", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

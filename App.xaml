@@ -7,7 +7,10 @@
     
     
     <Application.Resources>
-        
+        <Style x:Key="Ubuntu">
+            <Setter Property="TextElement.FontFamily" Value="Properties/Ubuntu_Regular" />
+        </Style>
+
         <!-- Plop this in your resource dictionary or your resource declaration -->
         <Style x:Key="TheAwesomeXAMLimage" TargetType="ContentControl">
             <!-- Add additional Setters Here -->

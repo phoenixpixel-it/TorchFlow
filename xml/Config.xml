@@ -1,18 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Config>
-
-  <DataFolder>%MYDOC%</DataFolder>
-
+  
   <Settings>
-    <Folder>%MYDOCS%\TorchFlow</Folder>
-    <FileName></FileName>
+    <FolderName>%MYDOCS%\TorchFlow</FolderName>
+    <FileName>Settings.xml</FileName>
     <MaxValue></MaxValue>
   </Settings>
 
-  <Standard-Cmds>
-    <Folder>%MYDOC%\TorchFlow</Folder>
-    <FileName></FileName>
+  <Commands>
+    <FolderName>%MYDOCS%\TorchFlow</FolderName>
+    <FileName>Commands.xml</FileName>
     <MaxValue></MaxValue>
-  </Standard-Cmds>
+  </Commands>
   
 </Config>
