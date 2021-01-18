@@ -22,9 +22,6 @@ using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using GlobalHotKey;
 
-
-
-
 namespace TorchFlow
 {
     /// <summary>
@@ -33,48 +30,62 @@ namespace TorchFlow
     public partial class MainWindow : Window
     {
 
-        
-       
+        [System.Runtime.InteropServices.DllImport("user32.dll")]                                    // Import user32.dll
+        public static extern void SetWindowText(int hWnd, String text);
+        public const int MOD_ALT = 0x12;                                                            // Alt key
+        public const int VK_SPACE = 0x20;                                                           // Space key
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]                             // Import user32.dll
-        public static extern void SetWindowText(int hWnd, String text);                      // Import user32.dll
-       
+
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        [DllImport("user32.dll")]
+        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
 
         public void ResizeWindow()
         {
             // ResizeWindow()
-            int main_window_height = 60;                                                     // Resize Main Window Height
-            int main_window_width = 820;                                                     // Resize Main Window Width
+            int main_window_height = 60;                                                            // Resize Main Window Height
+            int main_window_width = 820;                                                            // Resize Main Window Width
 
             this.Width = main_window_width;
             this.Height = main_window_height;
 
-            border_search.Width = main_window_width;                                         //Resize SearchBar Width
+            border_search.Width = main_window_width;                                                //Resize SearchBar Width
 
             int border_search_height = 60;
             border_search.Width = main_window_width;
-            border_search.Height = border_search_height;                                     //Resize SearchBar Height
+            border_search.Height = border_search_height;                                            //Resize SearchBar Height
 
-            double button_search_height = border_search_height / 2.40;                       // Resize Search Button Height
-            double button_search_width = button_search_height;                               // Resize Search Button Width
+            double button_search_height = border_search_height / 2.40;                              // Resize Search Button Height
+            double button_search_width = button_search_height;                                      // Resize Search Button Width
 
             search_button.Width = button_search_width;
             search_button.Height = button_search_height;
 
             double button_search_margin_right = main_window_width / 1.12;
-            search_button.Margin = new Thickness(0, 10, button_search_margin_right, 10);     // Resize Search Button margins
+            search_button.Margin = new Thickness(0, 10, button_search_margin_right, 10);            // Resize Search Button margins
 
-            search_tab.Width = main_window_width;                                            // Set search tab results Width
-            search_tab.Height = main_window_height * 10;                                     // Set search tab results Width
+            search_tab.Width = main_window_width;                                                   // Set search tab results Width
+            search_tab.Height = main_window_height * 10;                                            // Set search tab results Width
         }
 
-        public string backgtext { get; private set; }                                        //Search string value
+        public string backgtext { get; private set; }                                               //Search string value
 
         public MainWindow()
         {
-            // MainWindow()
-            InitializeComponent();
+            System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();     // Add TorchFlow in application bar
+            notifyicon.Icon = new System.Drawing.Icon("icon.ico");                                  
+            notifyicon.Visible = true;
+            System.Windows.Forms.ContextMenu notifyiconmenu= new System.Windows.Forms.ContextMenu();
+            notifyiconmenu.MenuItems.Add("Close", new EventHandler(Close));
+            notifyiconmenu.MenuItems.Add("Open", new EventHandler(Open));
+            notifyicon.ContextMenu = notifyiconmenu;
+            RegisterHotKey(this.Handle, MOD_ALT, 8, (int)Keys.D);
+            RegisterHotKey(this.Handle, VK_SPACE, 8, (int)Keys.D);
+
+
+            InitializeComponent();                                                                  // Load MainWindow()
 
             string[] args = null;
 
@@ -109,13 +120,11 @@ namespace TorchFlow
                      * 
                      */
                 }
-                
+
                 
 
             }
 
-            darker_background backg = new darker_background();                               // Show Background window 
-            backg.Show();
 
             ResizeWindow();                                                                  // Go to "ResizeWindow() Function" 
             Topmost = true;
@@ -161,12 +170,20 @@ namespace TorchFlow
              * 
              */
 
-
+            darker_background backg = new darker_background();                               // Show Background window 
+            backg.Show();
         }
-
         
-        
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void Open(object sender, EventArgs e)                                        // Open in application bar
+        {
+            MainWindow mainwin = new MainWindow();
+            mainwin.Show();
+        }
+        private void Close(object sender, EventArgs e)                                       // Close TorchFlow
+        {
+            Application.Current.Shutdown();
+        }
+        private void Window_KeyDown(object sender, KeyEventArgs e)                           
         {
             textbox_search.Foreground = Brushes.White;                                       // Set textbox color to white
             backgtext = "";                                                                  // Set background text to ""
@@ -192,7 +209,7 @@ namespace TorchFlow
 
         public void Window_Closing(object sender, CancelEventArgs e)
         {
-            Application.Current.Shutdown();                                                  // Close all windows (exit code=0)
+            Application.Current.Shutdown();                                                    // Close all windows (exit code=0)
         }
 
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)

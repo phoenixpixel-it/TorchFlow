@@ -12,7 +12,8 @@
         ShowInTaskbar="False"
         UseLayoutRounding="True" KeyDown="Window_KeyDown" Height="61" Closing="Window_Closing">
     
-    <Border x:Name="border_search" CornerRadius="30" Background="#FF1F1F1F">
+    <Border x:Name="border_search" CornerRadius="30" Background="#FF1F1F1F"
+            >
 
         <Grid>
             <Grid.RowDefinitions>
