@@ -39,6 +39,7 @@ The software is based on a minimal search bar,
 which can be activated with a combination of keys.<br>
 It allows you to search for files and folders on Windows,
 but also do in-depth searches on specific websites using commands (e.g. -yt)
+  <br><br>
 
 <img src="https://i.imgur.com/Ettx4Ci.png" alt="TorchFlow Render">
 </p>
