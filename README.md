@@ -15,7 +15,7 @@
 
 ---
 
-<p align="center"> 🔍Search management software in the operating system and on any website in a simple, functional and fast way. Totally customizable🚀
+<p align="center"> 🔍Search management software in the operating system and on <br>any website in a simple, functional and fast way. Totally customizable🚀
     <br>
 </p>
 
@@ -43,6 +43,8 @@ but also do in-depth searches on specific websites using commands (e.g. -yt)
 
 <img src="https://i.imgur.com/Ettx4Ci.png" alt="TorchFlow Render">
 </p>
+
+
 ## 🚀 Future Scope <a name = "future_scope"></a>
 
 We would like to optimize the software in the future to improve and speed up the search as much as possible🔮
