@@ -1,5 +1,3 @@
-<h1>Work in progress</h1>
-
 <p align="center">
   <a href="" rel="noopener">
  <img width=200px height=200px src="https://i.imgur.com/DHjBkX8.png" alt="TorchFlow logo"></a>
@@ -36,13 +34,14 @@
 
 
 ## 🧐 About <a name = "about"></a>
-<b>⚠️A BETA OF THE PROGRAM HAS NOT BEEN RELEASED YET⚠️<b>
+<b>⚠️A BETA OF THE PROGRAM HAS NOT BEEN RELEASED YET⚠️<b><br>
 The software is based on a minimal search bar,
 which can be activated with a combination of keys.<br>
 It allows you to search for files and folders on Windows,
 but also do in-depth searches on specific websites using commands (e.g. -yt)
+<p align="center">
 <img src="https://i.imgur.com/Ettx4Ci.png" alt="TorchFlow Render">
-
+</p>
 ## 🚀 Future Scope <a name = "future_scope"></a>
 
 We would like to optimize the software in the future to improve and speed up the search as much as possible🔮
@@ -83,9 +82,9 @@ With C# and WPF.
 
 With <kbd>Alt</kbd> + <kbd>Space</kbd> you can open TorchFlow in the foreground,
 to start a search immediately.
-
+<p align="center">
 <img src="https://i.imgur.com/GREyt6V.png" alt="TorchFlow Usage">
-
+</p>
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
