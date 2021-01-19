@@ -42,5 +42,19 @@ namespace TorchFlow
             Application.Current.Shutdown();                                 // Close all windows (exit code=0)
           
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt) // Is Alt key pressed
+            {
+                if (Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.Space))
+                {
+                    darker_background backg = new darker_background();
+                    backg.Hide();
+                    MainWindow mainw = new MainWindow();
+                    mainw.Hide();
+                }
+            }
+        }
     }
 }

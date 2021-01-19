@@ -11,7 +11,7 @@ static class Var
         {
             System.IO.Directory.CreateDirectory(Direcotry_db);
         }
-        
+
     }
 
     public static void Check_xml()

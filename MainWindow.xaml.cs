@@ -41,11 +41,11 @@ namespace TorchFlow
         [DllImport("user32.dll")]
         public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
-
         public void ResizeWindow()
         {
+            
             // ResizeWindow()
-            int main_window_height = 60;                                                            // Resize Main Window Height
+            int main_window_height = 100;                                                           // Resize Main Window Height
             int main_window_width = 820;                                                            // Resize Main Window Width
 
             this.Width = main_window_width;
@@ -68,12 +68,17 @@ namespace TorchFlow
 
             search_tab.Width = main_window_width;                                                   // Set search tab results Width
             search_tab.Height = main_window_height * 10;                                            // Set search tab results Width
+            
         }
 
         public string backgtext { get; private set; }                                               //Search string value
 
         public MainWindow()
         {
+            Background = Brushes.Black;
+            Opacity = 0.4;
+            
+
             System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();     // Add TorchFlow in application bar
             notifyicon.Icon = new System.Drawing.Icon("icon.ico");                                  
             notifyicon.Visible = true;
@@ -81,11 +86,17 @@ namespace TorchFlow
             notifyiconmenu.MenuItems.Add("Close", new EventHandler(Close));
             notifyiconmenu.MenuItems.Add("Open", new EventHandler(Open));
             notifyicon.ContextMenu = notifyiconmenu;
-            RegisterHotKey(this.Handle, MOD_ALT, 8, (int)Keys.D);
-            RegisterHotKey(this.Handle, VK_SPACE, 8, (int)Keys.D);
-
-
+            
             InitializeComponent();                                                                  // Load MainWindow()
+
+
+            ResizeWindow();                                                                         // Go to "ResizeWindow() Function" 
+            Topmost = true;
+            // App always on top
+
+            backgtext = "Write here to search...";                                                  // Background text textbox_search
+            textbox_search.Foreground = Brushes.Gray;                                               // Add Background color text
+            textbox_search.Text = backgtext;                                                        // Add Background Text
 
             string[] args = null;
 
@@ -126,14 +137,7 @@ namespace TorchFlow
             }
 
 
-            ResizeWindow();                                                                  // Go to "ResizeWindow() Function" 
-            Topmost = true;
-            // App always on top
-
-            backgtext = "Write here to search...";                                           // Background text textbox_search
-            textbox_search.Foreground = Brushes.Gray;                                        // Add Background color text
-            textbox_search.Text = backgtext;                                                 // Add Background Text
-
+            
             /*
             // Load Config
             LoadEvents LoadConfig = new LoadEvents();
@@ -169,26 +173,36 @@ namespace TorchFlow
              * 
              * 
              */
-
-            darker_background backg = new darker_background();                               // Show Background window 
+            /*
+            darker_background backg = new darker_background();                                      // Show Background window 
             backg.Show();
+            */
         }
         
-        private void Open(object sender, EventArgs e)                                        // Open in application bar
+
+        private void Open(object sender, EventArgs e)                                               // Open in application bar
         {
             MainWindow mainwin = new MainWindow();
             mainwin.Show();
         }
-        private void Close(object sender, EventArgs e)                                       // Close TorchFlow
+        private void Close(object sender, EventArgs e)                                              // Close TorchFlow
         {
             Application.Current.Shutdown();
         }
         private void Window_KeyDown(object sender, KeyEventArgs e)                           
         {
-            textbox_search.Foreground = Brushes.White;                                       // Set textbox color to white
-            backgtext = "";                                                                  // Set background text to ""
-            textbox_search.Focus();                                                          // Click Textbox
-
+            textbox_search.Foreground = Brushes.White;                                              // Set textbox color to white
+            backgtext = "";                                                                         // Set background text to ""
+            textbox_search.Focus();                                                                 // Click Textbox
+            if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)                        // Is Alt key pressed
+            {
+                if (Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.Space))
+                {
+                    darker_background backg = new darker_background();
+                    App.Current.MainWindow.Hide();
+                    backg.Hide();
+                }
+            }
 
         }
 
@@ -199,7 +213,7 @@ namespace TorchFlow
 
         private void textbox_search_GotFocus(object sender, RoutedEventArgs e)
         {
-            textbox_search.Text = "";                                                        // Set Textbox_search to ""
+            textbox_search.Text = "";                                                               // Set Textbox_search to ""
         }
 
         private void search_button_Click(object sender, RoutedEventArgs e)
@@ -209,7 +223,7 @@ namespace TorchFlow
 
         public void Window_Closing(object sender, CancelEventArgs e)
         {
-            Application.Current.Shutdown();                                                    // Close all windows (exit code=0)
+            Application.Current.Shutdown();                                                         // Close all windows (exit code=0)
         }
 
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)

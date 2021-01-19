@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="darker_background" Height="450" Width="800"
         WindowStyle="None"
-        Background="Transparent" GotFocus="Window_GotFocus" Closing="Window_Closing">
+        Background="Transparent" GotFocus="Window_GotFocus" Closing="Window_Closing" KeyDown="Window_KeyDown">
     <Grid>
         
     </Grid>
