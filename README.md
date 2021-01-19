@@ -1,5 +1,3 @@
-<h1>Work in progress</h1>
-
 <p align="center">
   <a href="" rel="noopener">
  <img width=200px height=200px src="https://i.imgur.com/DHjBkX8.png" alt="TorchFlow logo"></a>
@@ -10,15 +8,13 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/phoenixpixel-it/The-Documentation-Compendium.svg)](https://github.com/phoenixpixel-it/TorchFlow/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![License](https://img.shields.io/badge/license-BSD-3.svg)](/LICENSE)
 
 </div>
 
 ---
 
-<p align="center"> 🔍Search management software in the operating system and on any website in a simple, functional and fast way. Totally customizable🚀
+<p align="center"> 🔍Search management software in the operating system and on <br>any website in a simple, functional and fast way. Totally customizable🚀
     <br>
 </p>
 
@@ -36,12 +32,17 @@
 
 
 ## 🧐 About <a name = "about"></a>
-<b>⚠️A BETA OF THE PROGRAM HAS NOT BEEN RELEASED YET⚠️<b>
+<p align="center">
+<b>⚠️A BETA OF THE PROGRAM HAS NOT BEEN RELEASED YET⚠️<b><br>
 The software is based on a minimal search bar,
 which can be activated with a combination of keys.<br>
 It allows you to search for files and folders on Windows,
 but also do in-depth searches on specific websites using commands (e.g. -yt)
+  <br><br>
+
 <img src="https://i.imgur.com/Ettx4Ci.png" alt="TorchFlow Render">
+</p>
+
 
 ## 🚀 Future Scope <a name = "future_scope"></a>
 
@@ -83,9 +84,9 @@ With C# and WPF.
 
 With <kbd>Alt</kbd> + <kbd>Space</kbd> you can open TorchFlow in the foreground,
 to start a search immediately.
-
+<p align="center">
 <img src="https://i.imgur.com/GREyt6V.png" alt="TorchFlow Usage">
-
+</p>
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
