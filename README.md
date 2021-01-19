@@ -33,12 +33,13 @@
 
 
 ## 🧐 About <a name = "about"></a>
+<p align="center">
 <b>⚠️A BETA OF THE PROGRAM HAS NOT BEEN RELEASED YET⚠️<b><br>
 The software is based on a minimal search bar,
 which can be activated with a combination of keys.<br>
 It allows you to search for files and folders on Windows,
 but also do in-depth searches on specific websites using commands (e.g. -yt)
-<p align="center">
+
 <img src="https://i.imgur.com/Ettx4Ci.png" alt="TorchFlow Render">
 </p>
 ## 🚀 Future Scope <a name = "future_scope"></a>
