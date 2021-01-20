@@ -7,23 +7,30 @@
         mc:Ignorable="d"
         Title="TorchFlow" WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Background="Transparent"
+        
         ResizeMode="NoResize"
         ShowInTaskbar="False"
         UseLayoutRounding="True" 
         WindowState="Maximized" 
         KeyDown="Window_KeyDown" 
-        Height="641.8" 
-        Closing="Window_Closing">
+        Height="654.8" 
+        Closing="Window_Closing"
+        AllowsTransparency="True">
+    
 
-    <Border x:Name="border_search" Height="61" CornerRadius="30" Background="#FF1F1F1F" Opacity="1">
 
+    <Window.Background>
+        <SolidColorBrush Opacity="0.4" Color="Black"/>
+    </Window.Background>
+
+    <Border x:Name="border_search" Height="61" CornerRadius="20" Background="#FF1F1F1F" >
+    
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition/>  
             </Grid.RowDefinitions>
             <ContentControl Style="{StaticResource TheAwesomeXAMLimage}"/>
-            <Button x:Name="search_button" BorderBrush="Transparent" Click="search_button_Click" Cursor="Hand" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Margin="36,16,709,19" BorderThickness="0">
+            <Button x:Name="search_button" BorderBrush="Transparent" Click="search_button_Click" Cursor="Hand" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Margin="36,16,709,19" BorderThickness="0" Opacity="1">
                 <Button.Content>
                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                         <Canvas Name="svg41" Width="612.01" Height="612.01" Canvas.Left="0" Canvas.Top="0">
@@ -97,19 +104,17 @@
                 </Separator.RenderTransform>
             </Separator>
 
-
             <TextBox x:Name="textbox_search" Style="{DynamicResource Ubuntu}" HorizontalAlignment="Left" Height="24" Margin="94,18,0,0" VerticalAlignment="Top" Width="654" Background="Transparent" FontFamily="Roboto" TextWrapping="Wrap" FontSize="20" Foreground="#FFEAEAEA" BorderBrush="Transparent" BorderThickness="0" GotFocus="textbox_search_GotFocus" SelectionBrush="RoyalBlue" Cursor="IBeam" UseLayoutRounding="True" CaretBrush="White" KeyDown="OnKeyDownHandler" TextChanged="textbox_search_TextChanged">
 
             </TextBox>
             <Border x:Name="search_tab" CornerRadius="30" Background="#FF1F1F1F" Height="237" VerticalAlignment="Top" Margin="0,80,0,-256" >
 
             </Border>
-            
 
         </Grid>
     </Border>
 
-
+    
 </Window>
 
 

@@ -45,29 +45,25 @@ namespace TorchFlow
         {
             
             // ResizeWindow()
-            int main_window_height = 100;                                                           // Resize Main Window Height
             int main_window_width = 820;                                                            // Resize Main Window Width
 
-            this.Width = main_window_width;
-            this.Height = main_window_height;
-
-            border_search.Width = main_window_width;                                                //Resize SearchBar Width
-
+            
+            border_search.Width = main_window_width;                                                //Resize MainWindow Width           
             int border_search_height = 60;
-            border_search.Width = main_window_width;
-            border_search.Height = border_search_height;                                            //Resize SearchBar Height
+            border_search.Width = main_window_width;                                                // Resize SearchBar Width
+            border_search.Height = border_search_height;                                            // Resize SearchBar Height
+
 
             double button_search_height = border_search_height / 2.40;                              // Resize Search Button Height
             double button_search_width = button_search_height;                                      // Resize Search Button Width
-
-            search_button.Width = button_search_width;
-            search_button.Height = button_search_height;
-
-            double button_search_margin_right = main_window_width / 1.12;
+            search_button.Width = button_search_width;                                              // Resize Search Button Height            
+            search_button.Height = button_search_height;                                            // Resize Search Button Width
+            double button_search_margin_right = main_window_width / 1.12;                           // Resize Search Button margins
             search_button.Margin = new Thickness(0, 10, button_search_margin_right, 10);            // Resize Search Button margins
 
+
             search_tab.Width = main_window_width;                                                   // Set search tab results Width
-            search_tab.Height = main_window_height * 10;                                            // Set search tab results Width
+            search_tab.Height = 230;                                                                // Set search tab results Width
             
         }
 
@@ -75,9 +71,7 @@ namespace TorchFlow
 
         public MainWindow()
         {
-            Background = Brushes.Black;
-            Opacity = 0.4;
-            
+                       
 
             System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();     // Add TorchFlow in application bar
             notifyicon.Icon = new System.Drawing.Icon("icon.ico");                                  
@@ -223,7 +217,9 @@ namespace TorchFlow
 
         public void Window_Closing(object sender, CancelEventArgs e)
         {
+            System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();
             Application.Current.Shutdown();                                                         // Close all windows (exit code=0)
+            notifyicon.Visible = false;                                                             // Hide notifyicon
         }
 
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
