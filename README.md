@@ -1,6 +1,6 @@
 <p align="center">
   
-  <b>⚠️A BETA OF THE PROGRAM HAS NOT BEEN RELEASED YET⚠️<b> <br>
+  <b>⚠️A BETA OF THE PROGRAM HAS NOT BEEN RELEASED YET⚠️<b>
   
   <a href="" rel="noopener">
  <img width=200px height=200px src="https://i.imgur.com/DHjBkX8.png" alt="TorchFlow logo"></a>
