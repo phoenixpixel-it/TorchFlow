@@ -21,6 +21,8 @@ using System.Net.Mime;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using GlobalHotKey;
+using System.Threading;
+
 
 namespace TorchFlow
 {
@@ -158,6 +160,21 @@ namespace TorchFlow
             
         }
 
+        private void OpenFinder(object sender, EventArgs e)                                         // Open Finder in application bar
+        {
+            MainWindow mainwin = new MainWindow();
+            mainwin.Show();
+        }
+        private void OpenDashboard(object sender, EventArgs e)                                      // Open Dashboard in application bar
+        {
+            Dashboard dashboard = new Dashboard();
+            dashboard.Show();
+        }
+        private void Close(object sender, EventArgs e)                                              // Close TorchFlow in application bar
+        {
+            Application.Current.Shutdown();
+        }
+
         public string backgtext { get; private set; }                                               // Search string value
 
         public int isopened;                                                                        // Create int "Is Opened", understand if the window is open or closed        
@@ -174,11 +191,14 @@ namespace TorchFlow
             backgtext = "Write here to search...";                                                  // Background text textbox_search
             textbox_search.Foreground = Brushes.Gray;                                               // Add Background color text
             textbox_search.Text = backgtext;                                                        // Add Background Text
-            
+
+
+
+            Commands.LoadCommands();
         }
 
 
-        protected override void OnSourceInitialized(EventArgs e)
+        protected override void OnSourceInitialized(EventArgs e)                                    // On Source Initialized | GlobalHotKeys
         {
             base.OnSourceInitialized(e);
             var helper = new WindowInteropHelper(this);
@@ -187,7 +207,7 @@ namespace TorchFlow
             RegisterHotKey();
         }
 
-        protected override void OnClosed(EventArgs e)
+        protected override void OnClosed(EventArgs e)                                               // On Closed | GlobalHotKeys
         {
             _source.RemoveHook(HwndHook);
             _source = null;
@@ -195,7 +215,7 @@ namespace TorchFlow
             base.OnClosed(e);
         }
 
-        private void RegisterHotKey()
+        private void RegisterHotKey()                                                               // On RegisterHotKey | GlobalHotKeys
         {
             var helper = new WindowInteropHelper(this);
             const uint MOD_CONTROL = 0x0002;
@@ -206,7 +226,7 @@ namespace TorchFlow
             }
         }
 
-        private void UnregisterHotKey()
+        private void UnregisterHotKey()                                                             // On UnregisterHotKey | GlobalHotKeys
         {
             var helper = new WindowInteropHelper(this);
             UnregisterHotKey(helper.Handle, HOTKEY_ID);
@@ -221,7 +241,7 @@ namespace TorchFlow
                     switch (wParam.ToInt32())
                     {
                         case HOTKEY_ID:
-                            OnHotKeyPressed();
+                            OnHotKeyPressed();                                                      // It detects keys when the application is working in background.
                             handled = true;
                             break;
                     }
@@ -231,54 +251,31 @@ namespace TorchFlow
         }
 
 
-        private void OnHotKeyPressed()
-        {
-            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)                // Is CTRL key pressed
-            {
-                if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))              // Keys CTRL + SPACE
-                {
-                    if (isopened == 0)                                                              // If the application is in background mode
-                    {
-                        this.Show();
-                        isopened = 1;
-                        backgtext = "Write here to search...";                                      // Background text textbox_search
-                        textbox_search.Foreground = Brushes.Gray;                                   // Add Background color text
-                        textbox_search.Text = backgtext;                                            // Add Background Text
-                    }
-                }
-            }           
+        private void OnHotKeyPressed()                                                              // When pressed a key
+        {           
+           if (isopened == 0)                                                                       // If the application is in background mode
+           {
+                this.Show();
+                backgtext = "Write here to search...";                                              // Background text textbox_search
+                textbox_search.Foreground = Brushes.Gray;                                           // Add Background color text
+                textbox_search.Text = backgtext;                                                    // Add Background Text          
+                isopened = 1;
+           }
+
+           if (isopened == 1)
+           {
+                isopened = 0;                                                                       // Set isopened to 0 (Hide application)
+                App.Current.MainWindow.Hide();                                                      // Hide Application              
+           }
+
         }
 
-        private void OpenFinder(object sender, EventArgs e)                                         // Open Finder in application bar
-        {
-            MainWindow mainwin = new MainWindow();
-            mainwin.Show();
-        }
-        private void OpenDashboard(object sender, EventArgs e)                                         // Open Dashboard in application bar
-        {
-            Dashboard dashboard = new Dashboard();
-            dashboard.Show();
-        }
-        private void Close(object sender, EventArgs e)                                              // Close TorchFlow in application bar
-        {
-            Application.Current.Shutdown();
-        }
+        
 
         private void Window_KeyDown(object sender, KeyEventArgs e)                           
         {
-            textbox_search.Foreground = Brushes.White;                                              // Set textbox color to white
-            backgtext = "";                                                                         // Set background text to ""
-            textbox_search.Focus();                                                                 // Click Textbox
-            
-            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)                // Is CTRL key pressed
-            {
-                if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))              // Keys CTRL + SPACE
-                {
-                    isopened = 0;                                                                   // Set isopened to 0 (Hide application)
-                    App.Current.MainWindow.Hide();                                                  // Hide Application              
-                }
-            }
 
+            
             if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)                        // Is Alt key pressed
             {
                 if (Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.F4))                  // Keys ALT + F4
@@ -287,7 +284,11 @@ namespace TorchFlow
                     App.Current.MainWindow.Hide();                                                  // Hide Application              
                 }
             }
-
+            
+            textbox_search.Foreground = Brushes.White;                                              // Set textbox color to white
+            backgtext = "";                                                                         // Set background text to ""
+            textbox_search.Focus();                                                                 // Click Textbox 
+            
         }
 
         private void textbox_search_KeyDown(object sender, KeyEventArgs e)

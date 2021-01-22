@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Commands>
 
-  <Prefix></Prefix>
-  
-  <IDs>
-    <ID0></ID0>
-    <ID1></ID1>
-    <ID2></ID2>
-  </IDs>
-  
+  <Prefix>-</Prefix>
+
+  <Command>
+    <ID>01</ID>
+    <Name>gg</Name>
+  </Command>
+
 </Commands>
