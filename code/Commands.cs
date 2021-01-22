@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TorchFlow
+namespace TorchFlow.code
 {
-    class Extensions
+    class NewLoadEvents
     {
     }
 }

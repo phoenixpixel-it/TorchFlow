@@ -36,10 +36,21 @@ namespace TorchFlow
         public const int VK_SPACE = 0x20;                                                           // Space key
 
 
-        [DllImport("user32.dll")]
-        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
-        [DllImport("user32.dll")]
-        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+        
+        [DllImport("User32.dll")]                                                                   // Import user32.dll for Global Shortcuts
+        private static extern bool RegisterHotKey(                                                  // Create RegisterHotKey for Global Shortcuts
+            [In] IntPtr hWnd,
+            [In] int id,
+            [In] uint fsModifiers,
+            [In] uint vk);
+
+        [DllImport("User32.dll")]                                                                   // Import user32.dll for Global Shortcuts
+        private static extern bool UnregisterHotKey(                                                // Create UnregisterHotKey for Global Shortcuts  
+            [In] IntPtr hWnd,
+            [In] int id);
+
+        private HwndSource _source;                                                                 // Set GlobalHotKey Source
+        private const int HOTKEY_ID = 9000;                                                         // Set GlobalHotKey ID
 
         public void ResizeWindow()
         {
@@ -67,33 +78,9 @@ namespace TorchFlow
             
         }
 
-        public string backgtext { get; private set; }                                               //Search string value
-
-        public MainWindow()
+        public void Extensions()                                                                    // Add & Install extensions function
         {
-                       
-
-            System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();     // Add TorchFlow in application bar
-            notifyicon.Icon = new System.Drawing.Icon("icon.ico");                                  
-            notifyicon.Visible = true;
-            System.Windows.Forms.ContextMenu notifyiconmenu= new System.Windows.Forms.ContextMenu();
-            notifyiconmenu.MenuItems.Add("Close", new EventHandler(Close));
-            notifyiconmenu.MenuItems.Add("Open", new EventHandler(Open));
-            notifyicon.ContextMenu = notifyiconmenu;
-            
-            InitializeComponent();                                                                  // Load MainWindow()
-
-
-            ResizeWindow();                                                                         // Go to "ResizeWindow() Function" 
-            Topmost = true;
-            // App always on top
-
-            backgtext = "Write here to search...";                                                  // Background text textbox_search
-            textbox_search.Foreground = Brushes.Gray;                                               // Add Background color text
-            textbox_search.Text = backgtext;                                                        // Add Background Text
-
             string[] args = null;
-
 
             if (Environment.GetCommandLineArgs().Count() > 1)
             {
@@ -125,13 +112,11 @@ namespace TorchFlow
                      * 
                      */
                 }
-
-                
-
             }
+        }
 
-
-            
+        public void LoadConfig()
+        {
             /*
             // Load Config
             LoadEvents LoadConfig = new LoadEvents();
@@ -156,45 +141,150 @@ namespace TorchFlow
                     }
                 }
             }
-
-
-            // Load Settings
-
-
-            /*
-             * 
-             * load settings??? 
-             * 
-             * 
              */
-            /*
-            darker_background backg = new darker_background();                                      // Show Background window 
-            backg.Show();
-            */
-        }
-        
 
-        private void Open(object sender, EventArgs e)                                               // Open in application bar
+        }
+
+        public void NotifyIcon()                                                                    // Add TorchFlow in application bar
+        {
+            System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();     
+            notifyicon.Icon = new System.Drawing.Icon("icon.ico");                                  // Load Icon
+            System.Windows.Forms.ContextMenu notifyiconmenu = new System.Windows.Forms.ContextMenu();
+            notifyiconmenu.MenuItems.Add("Exit", new EventHandler(Close));
+            notifyiconmenu.MenuItems.Add("Open Finder", new EventHandler(OpenFinder));
+            notifyiconmenu.MenuItems.Add("Open Dashboard", new EventHandler(OpenDashboard));
+            notifyicon.ContextMenu = notifyiconmenu;
+            notifyicon.Visible = true;                                                              // Show NotifyIcon
+            
+        }
+
+        public string backgtext { get; private set; }                                               // Search string value
+
+        public int isopened;                                                                        // Create int "Is Opened", understand if the window is open or closed        
+        public MainWindow()
+        {
+            isopened = 1;                                                                           // Set Isopened to true
+          
+            InitializeComponent();                                                                  // Load MainWindow()
+            Extensions();                                                                           // Add & Install extensions function
+            ResizeWindow();                                                                         // Go to "ResizeWindow() Function" 
+            NotifyIcon();                                                                           // Load NotifyIcon                                                                 
+
+            //TextBox Search
+            backgtext = "Write here to search...";                                                  // Background text textbox_search
+            textbox_search.Foreground = Brushes.Gray;                                               // Add Background color text
+            textbox_search.Text = backgtext;                                                        // Add Background Text
+            
+        }
+
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            var helper = new WindowInteropHelper(this);
+            _source = HwndSource.FromHwnd(helper.Handle);
+            _source.AddHook(HwndHook);
+            RegisterHotKey();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            _source.RemoveHook(HwndHook);
+            _source = null;
+            UnregisterHotKey();
+            base.OnClosed(e);
+        }
+
+        private void RegisterHotKey()
+        {
+            var helper = new WindowInteropHelper(this);
+            const uint MOD_CONTROL = 0x0002;
+            const uint VK_SPACE = 0x20;           
+            if (!RegisterHotKey(helper.Handle, HOTKEY_ID, MOD_CONTROL, VK_SPACE))
+            {
+
+            }
+        }
+
+        private void UnregisterHotKey()
+        {
+            var helper = new WindowInteropHelper(this);
+            UnregisterHotKey(helper.Handle, HOTKEY_ID);
+        }
+
+        private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            const int WM_HOTKEY = 0x0312;
+            switch (msg)
+            {
+                case WM_HOTKEY:
+                    switch (wParam.ToInt32())
+                    {
+                        case HOTKEY_ID:
+                            OnHotKeyPressed();
+                            handled = true;
+                            break;
+                    }
+                    break;
+            }
+            return IntPtr.Zero;
+        }
+
+
+        private void OnHotKeyPressed()
+        {
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)                // Is CTRL key pressed
+            {
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))              // Keys CTRL + SPACE
+                {
+                    if (isopened == 0)                                                              // If the application is in background mode
+                    {
+                        this.Show();
+                        isopened = 1;
+                        backgtext = "Write here to search...";                                      // Background text textbox_search
+                        textbox_search.Foreground = Brushes.Gray;                                   // Add Background color text
+                        textbox_search.Text = backgtext;                                            // Add Background Text
+                    }
+                }
+            }           
+        }
+
+        private void OpenFinder(object sender, EventArgs e)                                         // Open Finder in application bar
         {
             MainWindow mainwin = new MainWindow();
             mainwin.Show();
         }
-        private void Close(object sender, EventArgs e)                                              // Close TorchFlow
+        private void OpenDashboard(object sender, EventArgs e)                                         // Open Dashboard in application bar
+        {
+            Dashboard dashboard = new Dashboard();
+            dashboard.Show();
+        }
+        private void Close(object sender, EventArgs e)                                              // Close TorchFlow in application bar
         {
             Application.Current.Shutdown();
         }
+
         private void Window_KeyDown(object sender, KeyEventArgs e)                           
         {
             textbox_search.Foreground = Brushes.White;                                              // Set textbox color to white
             backgtext = "";                                                                         // Set background text to ""
             textbox_search.Focus();                                                                 // Click Textbox
+            
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)                // Is CTRL key pressed
+            {
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))              // Keys CTRL + SPACE
+                {
+                    isopened = 0;                                                                   // Set isopened to 0 (Hide application)
+                    App.Current.MainWindow.Hide();                                                  // Hide Application              
+                }
+            }
+
             if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)                        // Is Alt key pressed
             {
-                if (Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.Space))
+                if (Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.F4))                  // Keys ALT + F4
                 {
-                    darker_background backg = new darker_background();
-                    App.Current.MainWindow.Hide();
-                    backg.Hide();
+                    isopened = 0;                                                                   // Set isopened to 0 (Hide application)
+                    App.Current.MainWindow.Hide();                                                  // Hide Application              
                 }
             }
 
@@ -217,9 +307,10 @@ namespace TorchFlow
 
         public void Window_Closing(object sender, CancelEventArgs e)
         {
-            System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();
-            Application.Current.Shutdown();                                                         // Close all windows (exit code=0)
+            
+            System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();     
             notifyicon.Visible = false;                                                             // Hide notifyicon
+            Application.Current.Shutdown();                                                         // Close all windows (exit code=0)
         }
 
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
