@@ -140,7 +140,9 @@
     <Resource Include="xml\Config.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="xml\Commands.xml" />
+    <Resource Include="xml\Commands.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />

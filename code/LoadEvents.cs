@@ -18,7 +18,7 @@ namespace TorchFlow
         public static string CommandsPrefix = null;
 
 
-        internal void LoadConfigFile(bool Reload)                                                                      // Carica la configurazione del programma
+        internal void LoadConfigFile(bool Reload)                                                                       // Carica la configurazione del programma
         {
             // LoadConfigFile(bool Reload)
             if (Reload == true)

@@ -192,8 +192,7 @@ namespace TorchFlow
             textbox_search.Foreground = Brushes.Gray;                                               // Add Background color text
             textbox_search.Text = backgtext;                                                        // Add Background Text
 
-
-
+            Commands.FixCommands();
             Commands.LoadCommands();
         }
 
@@ -308,10 +307,12 @@ namespace TorchFlow
 
         public void Window_Closing(object sender, CancelEventArgs e)
         {
-            
             System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();     
             notifyicon.Visible = false;                                                             // Hide notifyicon
-            Application.Current.Shutdown();                                                         // Close all windows (exit code=0)
+            notifyicon.Icon = null;                                                                 // Hide notifyicon icon
+            notifyicon.Dispose();                                                                   // Close notifyicon
+
+            Application.Current.Shutdown(0);                                                        // Close all windows (exit code=0)
         }
 
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
