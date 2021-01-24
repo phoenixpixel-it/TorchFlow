@@ -273,11 +273,13 @@ namespace TorchFlow
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
         {
             work();
+
         }
 
         void work ()
         {
             Command output = new Command();
+            
 
             output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);
             switch (output.ID)
@@ -285,28 +287,31 @@ namespace TorchFlow
                 case "-1":
                     output.Args = textbox_search.Text;
                     if (output.Args.Length > 0)
-                        Commands.SearchOnGoogle(output, enter);// this block
+                        Commands.SearchOnGoogle(output, enter);// this block                      
                     break;
 
                 case "01":// google
-                    Commands.SearchOnGoogle(output, enter);
+                    Commands.SearchOnGoogle(output, enter);                    
                     break;
 
                 case "02":// youtube
-                    Commands.SearchOnYoutube(output, enter);
+                    Commands.SearchOnYoutube(output, enter);                   
                     break;
 
                 case "03":// youtube music
-                    Commands.SearchOnYoutubeMusic(output, enter);
+                    Commands.SearchOnYoutubeMusic(output, enter);                    
                     break;
 
                 case "04":// maps
-                    Commands.SearchOnMaps(output, enter);
+                    Commands.SearchOnMaps(output, enter);                    
                     break;
 
                 default:
                     break;
             }
+
+            if(enter)            
+                this.Hide();            
         }
         
         public void OnKeyDownHandler(object sender, KeyEventArgs e)
