@@ -124,7 +124,7 @@ namespace TorchFlow
         public static string SearchOnGoogle (Command comando, bool exec = false)                                                            // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
-                Process.Start("https://www.google.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
+                Process.Start("https://www.google.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));                       // start default browser with the link
 
             if (comando.Args != "")
                 return "Search on Google: " + comando.Args.Replace("\n", "");
@@ -136,7 +136,7 @@ namespace TorchFlow
         public static string SearchOnYoutube (Command comando, bool exec = false)                                                           // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
-                Process.Start("https://www.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
+                Process.Start("https://www.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));                      // start default browser with the link
             if (comando.Args != "")
                 return "Search on Youtube: " + comando.Args.Replace("\n", "");
             else
@@ -147,7 +147,7 @@ namespace TorchFlow
         public static string SearchOnYoutubeMusic (Command comando, bool exec = false)                                                      // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
-                Process.Start("https://music.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
+                Process.Start("https://music.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));                    // start default browser with the link
 
             if (comando.Args != "")
                 return "Search on Youtube Music: " + comando.Args.Replace("\n", "");
@@ -159,7 +159,7 @@ namespace TorchFlow
         public static string SearchOnMaps (Command comando, bool exec = false)                                                              // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
-                Process.Start("https://www.google.com/maps/place/" + comando.Args.Replace("\n", "").Replace(" ", "+"));                     // 
+                Process.Start("https://www.google.com/maps/place/" + comando.Args.Replace("\n", "").Replace(" ", "+"));                     // start default browser with the link
             if (comando.Args != "")
                 return "Search on Maps: " + comando.Args.Replace("\n", "");
             else
