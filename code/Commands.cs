@@ -121,47 +121,47 @@ namespace TorchFlow
         }                                                                                                                                   // ############## END FUNCTION ##############
 
 
-        public static string SearchOnGoogle (Command comando, bool exec = false)                                                                   // ############## Luke_Screwdriver ##############
+        public static string SearchOnGoogle (Command comando, bool exec = false)                                                            // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
                 Process.Start("https://www.google.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
 
             if (comando.Args != "")
-                return "Cerca con Google: " + comando.Args.Replace("\n", "");
+                return "Search on Google: " + comando.Args.Replace("\n", "");
             else
                 return "";
 
         }                                                                                                                                    // ############## END FUNCTION ##############
 
-        public static string SearchOnYoutube (Command comando, bool exec = false)                                                                  // ############## Luke_Screwdriver ##############
+        public static string SearchOnYoutube (Command comando, bool exec = false)                                                           // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
                 Process.Start("https://www.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
             if (comando.Args != "")
-                return "Cerca con Youtube: " + comando.Args.Replace("\n", "");
+                return "Search on Youtube: " + comando.Args.Replace("\n", "");
             else
                 return "";
 
         }                                                                                                                                    // ############## END FUNCTION ##############
 
-        public static string SearchOnYoutubeMusic (Command comando, bool exec = false)                                                             // ############## Luke_Screwdriver ##############
+        public static string SearchOnYoutubeMusic (Command comando, bool exec = false)                                                      // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
                 Process.Start("https://music.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
 
             if (comando.Args != "")
-                return "Cerca con Youtube Music: " + comando.Args.Replace("\n", "");
+                return "Search on Youtube Music: " + comando.Args.Replace("\n", "");
             else
                 return "";
 
         }                                                                                                                                   // ############## END FUNCTION ##############
 
-        public static string SearchOnMaps (Command comando, bool exec = false)                                                                     // ############## Luke_Screwdriver ##############
+        public static string SearchOnMaps (Command comando, bool exec = false)                                                              // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
                 Process.Start("https://www.google.com/maps/place/" + comando.Args.Replace("\n", "").Replace(" ", "+"));                     // 
             if (comando.Args != "")
-                return "Cerca su Maps: " + comando.Args.Replace("\n", "");
+                return "Search on Maps: " + comando.Args.Replace("\n", "");
             else
                 return "";
 
