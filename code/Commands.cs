@@ -120,25 +120,24 @@ namespace TorchFlow
             return cleanstring;                                                                                                             // output is a clear string without doublespace
         }                                                                                                                                   // ############## END FUNCTION ##############
 
-
         public static string SearchOnGoogle (Command comando, bool exec = false)                                                            // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
                 Process.Start("https://www.google.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));                       // start default browser with the link
 
             if (comando.Args != "")
-                return "Search on Google: " + comando.Args.Replace("\n", "");
+                return "Search on Google: " + comando.Args.Replace("\n", "");                                                               // text of the tooltips
             else
                 return "";
 
-        }                                                                                                                                    // ############## END FUNCTION ##############
+        }                                                                                                                                   // ############## END FUNCTION ##############
 
         public static string SearchOnYoutube (Command comando, bool exec = false)                                                           // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
                 Process.Start("https://www.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));                      // start default browser with the link
             if (comando.Args != "")
-                return "Search on Youtube: " + comando.Args.Replace("\n", "");
+                return "Search on Youtube: " + comando.Args.Replace("\n", "");                                                              // text of the tooltips
             else
                 return "";
 
@@ -150,7 +149,7 @@ namespace TorchFlow
                 Process.Start("https://music.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));                    // start default browser with the link
 
             if (comando.Args != "")
-                return "Search on Youtube Music: " + comando.Args.Replace("\n", "");
+                return "Search on Youtube Music: " + comando.Args.Replace("\n", "");                                                        // text of the tooltips
             else
                 return "";
 

@@ -212,7 +212,7 @@ namespace TorchFlow
            {
                 this.Show();
                 isopened = 1;
-            }
+           }
    
         }
         
@@ -221,12 +221,11 @@ namespace TorchFlow
         private void Window_KeyDown(object sender, KeyEventArgs e)                           
         {
 
-             
-                if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))              // Keys CTRL + SPACE
-                {
-                    isopened = 0;                                                                   // Set isopened to 0 (Hide application)
-                    App.Current.MainWindow.Hide();                                                  // Hide Application              
-                }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))                  // Keys CTRL + SPACE
+            {                                                                         
+                isopened = 0;                                                                       // Set isopened to 0 (Hide application)
+                App.Current.MainWindow.Hide();                                                      // Hide Application              
+            }                                                                         
             
             if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)                        // Is Alt key pressed
             {
@@ -242,12 +241,6 @@ namespace TorchFlow
             textbox_search.Focus();                                                                 // Click Textbox 
             
         }
-
-        private void textbox_search_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-        }
-
         private void textbox_search_GotFocus(object sender, RoutedEventArgs e)
         {
             textbox_search.Text = "";                                                               // Set Textbox_search to ""
@@ -272,56 +265,54 @@ namespace TorchFlow
 
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            work();
-
+            work();                                                                                 // generate the tootips
         }
 
         void work ()
         {
             Command output = new Command();
-            
+            output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);           // process the input
 
-            output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);
-            switch (output.ID)
+            switch (output.ID)                                                                      // search block by id
             {
-                case "-1":
-                    output.Args = textbox_search.Text;
+                case "-1":                                                                          // search on google
+                    output.Args = textbox_search.Text;                                              // required to avoid word-removal
                     if (output.Args.Length > 0)
-                        Commands.SearchOnGoogle(output, enter);// this block                      
+                        Commands.SearchOnGoogle(output, enter);                                     // this block is called if the user does not enter an args
                     break;
 
-                case "01":// google
-                    Commands.SearchOnGoogle(output, enter);                    
+                case "01":                                                                          // search on google
+                    Commands.SearchOnGoogle(output, enter);
                     break;
 
-                case "02":// youtube
-                    Commands.SearchOnYoutube(output, enter);                   
+                case "02":                                                                          // search on youtube
+                    Commands.SearchOnYoutube(output, enter);
                     break;
 
-                case "03":// youtube music
-                    Commands.SearchOnYoutubeMusic(output, enter);                    
+                case "03":                                                                          // search on youtube music
+                    Commands.SearchOnYoutubeMusic(output, enter);
                     break;
 
-                case "04":// maps
-                    Commands.SearchOnMaps(output, enter);                    
+                case "04":                                                                          // search on maps
+                    Commands.SearchOnMaps(output, enter);
                     break;
 
-                default:
+                default:                                                                            // something went wrong
                     break;
             }
 
-            if(enter)            
-                this.Hide();            
+            if(enter)                                                                               // if the user type enter 
+                this.Hide();                                                                        // hide the form            
         }
         
         public void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
-            if (Keyboard.IsKeyDown(Key.Enter))                                  // On enter key pressed
+            if (Keyboard.IsKeyDown(Key.Enter))                                                      // On enter key pressed
             {
-               enter = true;
-                work();
-                enter = false;
-                textbox_search.Text = "";
+                enter = true;                                                                       // needed to start search
+                work();                                                                             // 
+                enter = false;                                                                      // disable the start to search
+                textbox_search.Text = "";                                                           // clear text
             }
             
         }
