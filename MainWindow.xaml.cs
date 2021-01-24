@@ -281,6 +281,10 @@ namespace TorchFlow
                         Commands.SearchOnGoogle(output, enter);                                     // this block is called if the user does not enter an args
                     break;
 
+                case "00":                                                                          // search on google
+                                                                                                    // search on file explorer
+                    break;
+
                 case "01":                                                                          // search on google
                     Commands.SearchOnGoogle(output, enter);
                     break;
@@ -295,6 +299,10 @@ namespace TorchFlow
 
                 case "04":                                                                          // search on maps
                     Commands.SearchOnMaps(output, enter);
+                    break;
+
+                case "05":                                                                          // execute cmd
+                    Commands.WindowsCmd(output, enter);
                     break;
 
                 default:                                                                            // something went wrong

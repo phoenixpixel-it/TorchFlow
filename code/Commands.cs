@@ -120,50 +120,68 @@ namespace TorchFlow
             return cleanstring;                                                                                                             // output is a clear string without doublespace
         }                                                                                                                                   // ############## END FUNCTION ##############
 
-        public static string SearchOnGoogle (Command comando, bool exec = false)                                                            // ############## Luke_Screwdriver ##############
+        public static string SearchOnGoogle (Command inputcommand, bool exec = false)                                                       // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
-                Process.Start("https://www.google.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));                       // start default browser with the link
+                Process.Start("https://www.google.com/search?q=" + inputcommand.Args.Replace("\n", "").Replace(" ", "+"));                  // start default browser with the link
 
-            if (comando.Args != "")
-                return "Search on Google: " + comando.Args.Replace("\n", "");                                                               // text of the tooltips
+            if (inputcommand.Args != "")
+                return "Search on Google: " + inputcommand.Args.Replace("\n", "");                                                          // text of the tooltips
             else
                 return "";
 
         }                                                                                                                                   // ############## END FUNCTION ##############
 
-        public static string SearchOnYoutube (Command comando, bool exec = false)                                                           // ############## Luke_Screwdriver ##############
+        public static string SearchOnYoutube (Command inputcommand, bool exec = false)                                                      // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
-                Process.Start("https://www.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));                      // start default browser with the link
-            if (comando.Args != "")
-                return "Search on Youtube: " + comando.Args.Replace("\n", "");                                                              // text of the tooltips
-            else
-                return "";
-
-        }                                                                                                                                    // ############## END FUNCTION ##############
-
-        public static string SearchOnYoutubeMusic (Command comando, bool exec = false)                                                      // ############## Luke_Screwdriver ##############
-        {
-            if (exec == true)
-                Process.Start("https://music.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));                    // start default browser with the link
-
-            if (comando.Args != "")
-                return "Search on Youtube Music: " + comando.Args.Replace("\n", "");                                                        // text of the tooltips
+                Process.Start("https://www.youtube.com/search?q=" + inputcommand.Args.Replace("\n", "").Replace(" ", "+"));                 // start default browser with the link
+            if (inputcommand.Args != "")
+                return "Search on Youtube: " + inputcommand.Args.Replace("\n", "");                                                         // text of the tooltips
             else
                 return "";
 
         }                                                                                                                                   // ############## END FUNCTION ##############
 
-        public static string SearchOnMaps (Command comando, bool exec = false)                                                              // ############## Luke_Screwdriver ##############
+        public static string SearchOnYoutubeMusic (Command inputcommand, bool exec = false)                                                 // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
-                Process.Start("https://www.google.com/maps/place/" + comando.Args.Replace("\n", "").Replace(" ", "+"));                     // start default browser with the link
-            if (comando.Args != "")
-                return "Search on Maps: " + comando.Args.Replace("\n", "");
+                Process.Start("https://music.youtube.com/search?q=" + inputcommand.Args.Replace("\n", "").Replace(" ", "+"));               // start default browser with the link
+
+            if (inputcommand.Args != "")
+                return "Search on Youtube Music: " + inputcommand.Args.Replace("\n", "");                                                   // text of the tooltips
             else
                 return "";
 
-        }
+        }                                                                                                                                   // ############## END FUNCTION ##############
+
+        public static string SearchOnMaps (Command inputcommand, bool exec = false)                                                         // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+                Process.Start("https://www.google.com/maps/place/" + inputcommand.Args.Replace("\n", "").Replace(" ", "+"));                // start default browser with the link
+            if (inputcommand.Args != "")
+                return "Search on Maps: " + inputcommand.Args.Replace("\n", "");                                                            // text of the tooltips
+            else
+                return "";
+
+        }                                                                                                                                   // ############## END FUNCTION ##############
+
+        public static string WindowsCmd (Command inputcommand, bool exec = false)                                                           // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+            {                                                                                                                               // start cmd
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                startInfo.FileName = "cmd.exe";
+                startInfo.Arguments = "/K "+ inputcommand.Args;
+                process.StartInfo = startInfo;
+                process.Start();
+            }
+            if (inputcommand.Args != "")
+                return "Execute on cmd: " + inputcommand.Args;                                                                              // text of the tooltips
+            else
+                return "";
+
+        }                                                                                                                                   // ############## END FUNCTION ##############
     }
 }

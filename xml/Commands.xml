@@ -4,8 +4,33 @@
   <Prefix>-</Prefix>
 
   <Command>
-    <ID>1</ID>
+    <ID>00</ID>
+    <Name>ex</Name>
+  </Command>
+  
+  <Command>
+    <ID>01</ID>
     <Name>gg</Name>
+  </Command>
+
+  <Command>
+    <ID>02</ID>
+    <Name>yt</Name>
+  </Command>
+
+  <Command>
+    <ID>03</ID>
+    <Name>ytm</Name>
+  </Command>
+
+  <Command>
+    <ID>04</ID>
+    <Name>mp</Name>
+  </Command>
+
+  <Command>
+    <ID>05</ID>
+    <Name>cmd</Name>
   </Command>
 
 </Commands>
