@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Windows;
 using TorchFlow.Properties;
+using System.Diagnostics;
 
 namespace TorchFlow
 {
@@ -119,5 +120,51 @@ namespace TorchFlow
             return cleanstring;                                                                                                             // output is a clear string without doublespace
         }                                                                                                                                   // ############## END FUNCTION ##############
 
+
+        private string SearchOnGoogle (Command comando, bool exec = false)                                                                   // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+                Process.Start("https://www.google.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
+
+            if (comando.Args != "")
+                return "Cerca con Google: " + comando.Args.Replace("\n", "");
+            else
+                return "";
+
+        }                                                                                                                                    // ############## END FUNCTION ##############
+
+        private string SearchOnYoutube (Command comando, bool exec = false)                                                                  // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+                Process.Start("https://www.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
+            if (comando.Args != "")
+                return "Cerca con Youtube: " + comando.Args.Replace("\n", "");
+            else
+                return "";
+
+        }                                                                                                                                    // ############## END FUNCTION ##############
+
+        private string SearchOnYoutubeMusic (Command comando, bool exec = false)                                                             // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+                Process.Start("https://music.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
+
+            if (comando.Args != "")
+                return "Cerca con Youtube Music: " + comando.Args.Replace("\n", "");
+            else
+                return "";
+
+        }                                                                                                                                   // ############## END FUNCTION ##############
+
+        private string SearchOnMaps (Command comando, bool exec = false)                                                                     // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+                Process.Start("https://www.google.com/maps/place/" + comando.Args.Replace("\n", "").Replace(" ", "+"));                     // 
+            if (comando.Args != "")
+                return "Cerca su Maps: " + comando.Args.Replace("\n", "");
+            else
+                return "";
+
+        }
     }
 }
