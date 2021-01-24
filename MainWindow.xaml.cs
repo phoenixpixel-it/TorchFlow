@@ -20,9 +20,9 @@ namespace TorchFlow
         public static extern void SetWindowText(int hWnd, String text);
         public const int MOD_ALT = 0x12;                                                            // Alt key
         public const int VK_SPACE = 0x20;                                                           // Space key
+        bool enter = false;
 
 
-        
         [DllImport("User32.dll")]                                                                   // Import user32.dll for Global Shortcuts
         private static extern bool RegisterHotKey(                                                  // Create RegisterHotKey for Global Shortcuts
             [In] IntPtr hWnd,
@@ -272,22 +272,51 @@ namespace TorchFlow
 
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Command output = new Command();
-            
-            output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);
-            if (output.ID != "-1")
-            {
-                MessageBox.Show("test");
-            }
-
-            
+            work();
         }
-        bool enter = false;
+
+        void work ()
+        {
+            Command output = new Command();
+
+            output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);
+            switch (output.ID)
+            {
+                case "-1":
+                    output.Args = textbox_search.Text;
+                    if (output.Args.Length > 0)
+                        Commands.SearchOnGoogle(output, enter);// this block
+                    break;
+
+                case "01":// google
+                    Commands.SearchOnGoogle(output, enter);
+                    break;
+
+                case "02":// youtube
+                    Commands.SearchOnYoutube(output, enter);
+                    break;
+
+                case "03":// youtube music
+                    Commands.SearchOnYoutubeMusic(output, enter);
+                    break;
+
+                case "04":// maps
+                    Commands.SearchOnMaps(output, enter);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        
         public void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.Enter))                                  // On enter key pressed
             {
                enter = true;
+                work();
+                enter = false;
+                textbox_search.Text = "";
             }
             
         }

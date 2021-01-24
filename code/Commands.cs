@@ -93,7 +93,7 @@ namespace TorchFlow
                     return result;                                                                                                          // output null
                 if (words[0] == list_command[a].Cmd)                                                                                        // if the word correspond to the first arg
                 {
-                    result.ID = Convert.ToString(a);                                                                                        // set num block
+                    result.ID = list_command[a].ID;                                                                                        // set num block
 					result.Cmd = words[0];                                                                                                  // set the cmd
                     if(input_search_box.Contains(words[0] + " "))
                         result.Args = input_search_box.Replace(words[0] + " ", "");                                                         // set the arguments
@@ -121,7 +121,7 @@ namespace TorchFlow
         }                                                                                                                                   // ############## END FUNCTION ##############
 
 
-        private string SearchOnGoogle (Command comando, bool exec = false)                                                                   // ############## Luke_Screwdriver ##############
+        public static string SearchOnGoogle (Command comando, bool exec = false)                                                                   // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
                 Process.Start("https://www.google.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
@@ -133,7 +133,7 @@ namespace TorchFlow
 
         }                                                                                                                                    // ############## END FUNCTION ##############
 
-        private string SearchOnYoutube (Command comando, bool exec = false)                                                                  // ############## Luke_Screwdriver ##############
+        public static string SearchOnYoutube (Command comando, bool exec = false)                                                                  // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
                 Process.Start("https://www.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
@@ -144,7 +144,7 @@ namespace TorchFlow
 
         }                                                                                                                                    // ############## END FUNCTION ##############
 
-        private string SearchOnYoutubeMusic (Command comando, bool exec = false)                                                             // ############## Luke_Screwdriver ##############
+        public static string SearchOnYoutubeMusic (Command comando, bool exec = false)                                                             // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
                 Process.Start("https://music.youtube.com/search?q=" + comando.Args.Replace("\n", "").Replace(" ", "+"));
@@ -156,7 +156,7 @@ namespace TorchFlow
 
         }                                                                                                                                   // ############## END FUNCTION ##############
 
-        private string SearchOnMaps (Command comando, bool exec = false)                                                                     // ############## Luke_Screwdriver ##############
+        public static string SearchOnMaps (Command comando, bool exec = false)                                                                     // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
                 Process.Start("https://www.google.com/maps/place/" + comando.Args.Replace("\n", "").Replace(" ", "+"));                     // 
