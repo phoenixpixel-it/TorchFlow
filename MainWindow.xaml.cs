@@ -1,28 +1,12 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Net.Mime;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
-using GlobalHotKey;
-using System.Threading;
-
+using System.Windows.Media;
 
 namespace TorchFlow
 {
@@ -77,6 +61,8 @@ namespace TorchFlow
 
             search_tab.Width = main_window_width;                                                   // Set search tab results Width
             search_tab.Height = 230;                                                                // Set search tab results Width
+
+            
             
         }
 
@@ -117,35 +103,6 @@ namespace TorchFlow
             }
         }
 
-        public void LoadConfig()
-        {
-            /*
-            // Load Config
-            LoadEvents LoadConfig = new LoadEvents();
-            LoadConfig.LoadConfigFile(true);
-
-
-            // Load Commands
-            Config CommandsData = new Config();
-
-            foreach (Config Find in LoadEvents.ConfigList)
-            {
-                // for each
-                if (Find.GetType() == typeof(Config))
-                {
-                    // true
-                    if (Find.Name == "COMMANDS")
-                    {
-                        // true
-                        LoadEvents LoadCommands = new LoadEvents();
-                        LoadCommands.CheckCommandsFile(Find.FolderName, Find.FileName, Convert.ToInt32(Find.MaxValue));
-                        LoadCommands.LoadCommandsFile(Find.FolderName, Find.FileName, Convert.ToInt32(Find.MaxValue), true);
-                    }
-                }
-            }
-             */
-
-        }
 
         public void NotifyIcon()                                                                    // Add TorchFlow in application bar
         {
@@ -181,12 +138,11 @@ namespace TorchFlow
         public MainWindow()
         {
             isopened = 1;                                                                           // Set Isopened to true
-          
+
             InitializeComponent();                                                                  // Load MainWindow()
             Extensions();                                                                           // Add & Install extensions function
             ResizeWindow();                                                                         // Go to "ResizeWindow() Function" 
             NotifyIcon();                                                                           // Load NotifyIcon                                                                 
-
             //TextBox Search
             backgtext = "Write here to search...";                                                  // Background text textbox_search
             textbox_search.Foreground = Brushes.Gray;                                               // Add Background color text
@@ -241,7 +197,7 @@ namespace TorchFlow
                     {
                         case HOTKEY_ID:
                             OnHotKeyPressed();                                                      // It detects keys when the application is working in background.
-                            handled = true;
+                            handled = true;                            
                             break;
                     }
                     break;
@@ -255,25 +211,22 @@ namespace TorchFlow
            if (isopened == 0)                                                                       // If the application is in background mode
            {
                 this.Show();
-                backgtext = "Write here to search...";                                              // Background text textbox_search
-                textbox_search.Foreground = Brushes.Gray;                                           // Add Background color text
-                textbox_search.Text = backgtext;                                                    // Add Background Text          
                 isopened = 1;
-           }
-
-           if (isopened == 1)
-           {
-                isopened = 0;                                                                       // Set isopened to 0 (Hide application)
-                App.Current.MainWindow.Hide();                                                      // Hide Application              
-           }
-
+            }
+   
         }
-
         
+
 
         private void Window_KeyDown(object sender, KeyEventArgs e)                           
         {
 
+             
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))              // Keys CTRL + SPACE
+                {
+                    isopened = 0;                                                                   // Set isopened to 0 (Hide application)
+                    App.Current.MainWindow.Hide();                                                  // Hide Application              
+                }
             
             if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)                        // Is Alt key pressed
             {
@@ -283,7 +236,7 @@ namespace TorchFlow
                     App.Current.MainWindow.Hide();                                                  // Hide Application              
                 }
             }
-            
+
             textbox_search.Foreground = Brushes.White;                                              // Set textbox color to white
             backgtext = "";                                                                         // Set background text to ""
             textbox_search.Focus();                                                                 // Click Textbox 
@@ -305,9 +258,11 @@ namespace TorchFlow
 
         }
 
+        
+
         public void Window_Closing(object sender, CancelEventArgs e)
         {
-            System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();     
+            System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();
             notifyicon.Visible = false;                                                             // Hide notifyicon
             notifyicon.Icon = null;                                                                 // Hide notifyicon icon
             notifyicon.Dispose();                                                                   // Close notifyicon
@@ -317,15 +272,29 @@ namespace TorchFlow
 
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
         {
+            Command output = new Command();
+            
+            output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);
+            if (output.ID != "-1")
+            {
+                MessageBox.Show("test");
+            }
+
             
         }
-
-        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        bool enter = false;
+        public void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
-            
+            if (Keyboard.IsKeyDown(Key.Enter))                                  // On enter key pressed
+            {
+               enter = true;
+            }
             
         }
 
+        private void labeltitle_Loaded(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

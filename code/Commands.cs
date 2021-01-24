@@ -12,7 +12,7 @@ namespace TorchFlow
 {
     public class Command
     {
-        public string ID;
+        public string ID = "-1";
         public string Cmd;
         public string Args;
     }
@@ -82,16 +82,22 @@ namespace TorchFlow
         }
 
 
-        public Command analysis_input(List<string> list_command, string input_search_box)                                                   // ############## Luke_Screwdriver ##############                                                        
+        public static Command analysis_input(List<Command> list_command, string input_search_box)                                           // ############## Luke_Screwdriver ##############                                                        
         {                                                                                                                                   // RETURN ==> the value to send at the block
             Command result = new Command();                                                                                                 // Create the result container
             String[] words = input_search_box.Split(' ');                                                                                   // make an array of string splitted by space char
             for (int a = 0; a < list_command.Count; a++)                                                                                    // 
             {
-                if (words[0] == list_command[a])                                                                                            // if the word correspond to the first arg
+                if (words[0].Length == 0)
+                    return result;                                                                                                          // output null
+                if (words[0] == list_command[a].Cmd)                                                                                        // if the word correspond to the first arg
                 {
                     result.ID = Convert.ToString(a);                                                                                        // set num block
-                    result.Args = input_search_box.Replace(words[0] + " ", "");                                                             // set the arguments
+					result.Cmd = words[0];                                                                                                  // set the cmd
+                    if(input_search_box.Contains(words[0] + " "))
+                        result.Args = input_search_box.Replace(words[0] + " ", "");                                                         // set the arguments
+                    else
+                        result.Args = input_search_box.Replace(words[0], "");                                                               // set the arguments
                 }
             }
             return result;                                                                                                                  // output is a block that contain info(block_num,args);                                                                                                                                           // return -1 if didn't find the block 

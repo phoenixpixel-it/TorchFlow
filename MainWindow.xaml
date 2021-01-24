@@ -16,7 +16,7 @@
         Height="654.8" 
         Closing="Window_Closing"
         AllowsTransparency="True">
-    
+
 
 
     <Window.Background>
@@ -24,10 +24,10 @@
     </Window.Background>
 
     <Border x:Name="border_search" Height="61" CornerRadius="20" Background="#FF1F1F1F" >
-    
+
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>  
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <ContentControl Style="{StaticResource TheAwesomeXAMLimage}"/>
             <Button x:Name="search_button" BorderBrush="Transparent" Click="search_button_Click" Cursor="Hand" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Margin="36,16,709,19" BorderThickness="0" Opacity="1">
@@ -107,16 +107,15 @@
             <TextBox x:Name="textbox_search" Style="{DynamicResource Ubuntu}" HorizontalAlignment="Left" Height="24" Margin="94,18,0,0" VerticalAlignment="Top" Width="654" Background="Transparent" FontFamily="Ubuntu" TextWrapping="Wrap" FontSize="20" Foreground="#FFEAEAEA" BorderBrush="Transparent" BorderThickness="0" GotFocus="textbox_search_GotFocus" SelectionBrush="RoyalBlue" Cursor="IBeam" UseLayoutRounding="True" CaretBrush="White" KeyDown="OnKeyDownHandler" TextChanged="textbox_search_TextChanged">
 
             </TextBox>
-            <Label Content="Label" HorizontalAlignment="Left" Foreground="Gray" Style="{DynamicResource Ubuntu}" Margin="94,18,0,0" VerticalAlignment="Top" Width="654" Height="24" Background="Transparent" FontFamily="Ubuntu"/>
             <Border x:Name="search_tab" CornerRadius="30" Background="#FF1F1F1F" Height="237" VerticalAlignment="Top" Margin="0,80,0,-256" >
 
             </Border>
-            
+
 
         </Grid>
     </Border>
 
-    
+
 </Window>
 
 
