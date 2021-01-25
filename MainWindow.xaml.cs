@@ -111,7 +111,6 @@ namespace TorchFlow
             }
         }
 
-
         public void NotifyIcon()                                                                    // Add TorchFlow in application bar
         {
             System.Windows.Forms.NotifyIcon notifyicon = new System.Windows.Forms.NotifyIcon();     
@@ -122,7 +121,6 @@ namespace TorchFlow
             notifyiconmenu.MenuItems.Add("Open Dashboard", new EventHandler(OpenDashboard));
             notifyicon.ContextMenu = notifyiconmenu;
             notifyicon.Visible = true;                                                              // Show NotifyIcon
-            
         }
 
         private void OpenFinder(object sender, EventArgs e)                                         // Open Finder in application bar
@@ -134,11 +132,13 @@ namespace TorchFlow
             textbox_search.Text = backgtext;                                                        // Add Background Text
 
         }
+
         private void OpenDashboard(object sender, EventArgs e)                                      // Open Dashboard in application bar
         {
             Dashboard dashboard = new Dashboard();
             dashboard.Show();
         }
+
         private void Close(object sender, EventArgs e)                                              // Close TorchFlow in application bar
         {
             Application.Current.Shutdown();
@@ -150,21 +150,26 @@ namespace TorchFlow
         void AddSearchToolTip(string text, string pathimage)
         {
             search_tab.Children.Clear();
-            Array.Resize(ref listtooltip, listtooltip.Length + 1);
-            int i = listtooltip.Length - 1;
-            listtooltip[i] = new UserSearchToolTip();
-            listtooltip[i].ContentLabel.Content = text;
+            if (text.Length > 0)
+            {
+                Array.Resize(ref listtooltip, listtooltip.Length + 1);
+                int i = listtooltip.Length - 1;
+                listtooltip[i] = new UserSearchToolTip();
+                listtooltip[i].ContentLabel.Content = text;
 
-            if(pathimage != "")
-                listtooltip[i].imagepath1.Source = new BitmapImage(new Uri(pathimage)); 
+                if (pathimage != "")
+                    listtooltip[i].imagepath1.Source = new BitmapImage(new Uri(pathimage));
 
-            search_tab_border.Height = search_tab_visible;
-            search_tab.Children.Add(listtooltip[i]);
-            if(i > 0)            
-                search_tab_border.Visibility = Visibility.Visible;
-            else            
-                search_tab_border.Visibility = Visibility.Hidden;           
-            
+                search_tab_border.Height = search_tab_visible;
+                search_tab.Children.Add(listtooltip[i]);
+                if (listtooltip.Length > 0)
+                    search_tab_border.Visibility = Visibility.Visible;
+                else
+                    search_tab_border.Visibility = Visibility.Hidden;
+            }
+            else
+                search_tab_border.Visibility = Visibility.Hidden;
+
         }
 
         void RemoveAllSearchToolTip()
@@ -175,8 +180,6 @@ namespace TorchFlow
             search_tab_border.Height = search_tab_visible;
             search_tab.Children.Clear();
         }
-        
-        
         
         public MainWindow()
         {
@@ -248,7 +251,6 @@ namespace TorchFlow
             return IntPtr.Zero;
         }
 
-
         private void OnHotKeyPressed()                                                              // When pressed a key
         {           
            if (isopened == 0)                                                                       // If the application is in background mode
@@ -258,8 +260,6 @@ namespace TorchFlow
            }
    
         }
-        
-
 
         private void Window_KeyDown(object sender, KeyEventArgs e)                           
         {
@@ -375,10 +375,8 @@ namespace TorchFlow
                 isopened = 0;
             }
             if (textbox_search.Text.Length == 0)
-            {
                 RemoveAllSearchToolTip();
-
-            }
+            
         }
         
         public void OnKeyDownHandler(object sender, KeyEventArgs e)
@@ -390,7 +388,6 @@ namespace TorchFlow
                 enter = false;                                                                      // disable the start to search
                 textbox_search.Text = "";                                                           // clear text
                 RemoveAllSearchToolTip();
-
             }
             
         }

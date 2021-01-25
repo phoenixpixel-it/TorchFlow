@@ -184,7 +184,7 @@ namespace TorchFlow
 
         }                                                                                                                                   // ############## END FUNCTION ##############
 
-        public static string ProgramFirefox (Command inputcommand, bool exec = false)                                                           // ############## Luke_Screwdriver ##############
+        public static string ProgramFirefox (Command inputcommand, bool exec = false)                                                       // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
             {    try
@@ -192,7 +192,7 @@ namespace TorchFlow
                     System.Diagnostics.Process process = new System.Diagnostics.Process();
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                     startInfo.FileName = "firefox.exe";
-                    startInfo.Arguments = inputcommand.Args;
+                    startInfo.Arguments = "-search \"" + inputcommand.Args+"\"";
                     process.StartInfo = startInfo;
                     process.Start();
                 }
@@ -202,7 +202,7 @@ namespace TorchFlow
                 
             }
             if (inputcommand.Args != "")
-                return "Execute on Firefox: " + inputcommand.Args;                                                                          // text of the tooltips
+                return "Search on Firefox: " + inputcommand.Args;                                                                          // text of the tooltips
             else
                 return "";
 
@@ -227,7 +227,7 @@ namespace TorchFlow
 
             }
             if (inputcommand.Args != "")
-                return "Execute on Chrome: " + inputcommand.Args;                                                                          // text of the tooltips
+                return "Search on Chrome: " + inputcommand.Args;                                                                          // text of the tooltips
             else
                 return "";
 
