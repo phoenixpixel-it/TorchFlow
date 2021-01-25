@@ -1,5 +1,6 @@
 ## 📝 Commands list
 
+```console
 - ex				search on files
 - gg				search on google
 - yt				search on youtube
@@ -8,3 +9,4 @@
 - cmd				execute command on cmd
 - frf				open firefox
 - chr				open chrome
+```
