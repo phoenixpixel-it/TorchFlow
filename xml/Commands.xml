@@ -33,4 +33,9 @@
     <Name>cmd</Name>
   </Command>
 
+  <Command>
+    <ID>06</ID>
+    <Name>frf</Name>
+  </Command>
+
 </Commands>

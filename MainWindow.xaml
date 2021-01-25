@@ -17,8 +17,6 @@
         Closing="Window_Closing"
         AllowsTransparency="True">
 
-
-
     <Window.Background>
         <SolidColorBrush Opacity="0.4" Color="Black"/>
     </Window.Background>
@@ -107,8 +105,9 @@
             <TextBox x:Name="textbox_search" Style="{DynamicResource Ubuntu}" HorizontalAlignment="Left" Height="24" Margin="94,18,0,0" VerticalAlignment="Top" Width="654" Background="Transparent" FontFamily="Ubuntu" TextWrapping="Wrap" FontSize="20" Foreground="#FFEAEAEA" BorderBrush="Transparent" BorderThickness="0" GotFocus="textbox_search_GotFocus" SelectionBrush="RoyalBlue" Cursor="IBeam" UseLayoutRounding="True" CaretBrush="White" KeyDown="OnKeyDownHandler" TextChanged="textbox_search_TextChanged">
 
             </TextBox>
-            <Border x:Name="search_tab" CornerRadius="30" Background="#FF1F1F1F" Height="237" VerticalAlignment="Top" Margin="0,80,0,-256" >
 
+            <Border  x:Name="search_tab_border" CornerRadius="20" Background="#FF1F1F1F" Height="237" VerticalAlignment="Top" Margin="0,80,0,-256" Loaded="search_tab_border_Loaded">
+                <Grid Name="search_tab"></Grid>
             </Border>
 
 

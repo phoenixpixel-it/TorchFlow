@@ -183,5 +183,23 @@ namespace TorchFlow
                 return "";
 
         }                                                                                                                                   // ############## END FUNCTION ##############
-    }
+
+        public static string ProgramFirefox (Command inputcommand, bool exec = false)                                                           // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+            {                                                                                                                               // start cmd
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                startInfo.FileName = "firefox.exe";
+                startInfo.Arguments = inputcommand.Args;
+                process.StartInfo = startInfo;
+                process.Start();
+            }
+            if (inputcommand.Args != "")
+                return "Execute on Firefox: " + inputcommand.Args;                                                                              // text of the tooltips
+            else
+                return "";
+
+        }
+    } 
 }

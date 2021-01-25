@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 
 namespace TorchFlow
 {
@@ -15,7 +17,8 @@ namespace TorchFlow
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        
+        
         [System.Runtime.InteropServices.DllImport("user32.dll")]                                    // Import user32.dll
         public static extern void SetWindowText(int hWnd, String text);
         public const int MOD_ALT = 0x12;                                                            // Alt key
@@ -59,11 +62,10 @@ namespace TorchFlow
             search_button.Margin = new Thickness(0, 10, button_search_margin_right, 10);            // Resize Search Button margins
 
 
-            search_tab.Width = main_window_width;                                                   // Set search tab results Width
-            search_tab.Height = 230;                                                                // Set search tab results Width
+            search_tab_border.Width = main_window_width;                                                   // Set search tab results Width
+            search_tab_border.Height = 230;                                                                // Set search tab results Width
 
-            
-            
+            search_tab_border.Visibility = Visibility.Hidden;
         }
 
         public void Extensions()                                                                    // Add & Install extensions function
@@ -119,8 +121,12 @@ namespace TorchFlow
 
         private void OpenFinder(object sender, EventArgs e)                                         // Open Finder in application bar
         {
-            MainWindow mainwin = new MainWindow();
-            mainwin.Show();
+            this.Visibility = Visibility.Visible;
+            //TextBox Search
+            backgtext = "Write here to search...";                                                  // Background text textbox_search
+            textbox_search.Foreground = Brushes.Gray;                                               // Add Background color text
+            textbox_search.Text = backgtext;                                                        // Add Background Text
+
         }
         private void OpenDashboard(object sender, EventArgs e)                                      // Open Dashboard in application bar
         {
@@ -134,6 +140,36 @@ namespace TorchFlow
 
         public string backgtext { get; private set; }                                               // Search string value
 
+        const int search_tab_visible = 49;                                                          // Set search_tab on "Hidden" 
+        void AddSearchToolTip(string text, string pathimage)
+        {
+            search_tab.Children.Clear();
+            Array.Resize(ref listtooltip, listtooltip.Length + 1);
+            int i = listtooltip.Length - 1;
+            listtooltip[i] = new UserSearchToolTip();
+            listtooltip[i].ContentLabel.Content = text;
+
+            if(pathimage != "")
+                listtooltip[i].imagepath1.Source = new BitmapImage(new Uri(pathimage)); 
+
+            search_tab_border.Height = search_tab_visible;
+            search_tab.Children.Add(listtooltip[i]);
+            if(i > 0)            
+                search_tab_border.Visibility = Visibility.Visible;
+                search_tab_border.Visibility = Visibility.Hidden;           
+            
+        }
+
+        void RemoveAllSearchToolTip()
+        {
+            
+            Array.Resize(ref listtooltip, 0);
+            search_tab_border.Visibility = Visibility.Hidden;
+            search_tab_border.Height = search_tab_visible;
+            search_tab.Children.Clear();
+        }
+        UserSearchToolTip[] listtooltip = new UserSearchToolTip[0];
+        
         public int isopened;                                                                        // Create int "Is Opened", understand if the window is open or closed        
         public MainWindow()
         {
@@ -150,8 +186,8 @@ namespace TorchFlow
 
             Commands.FixCommands();
             Commands.LoadCommands();
+                       
         }
-
 
         protected override void OnSourceInitialized(EventArgs e)                                    // On Source Initialized | GlobalHotKeys
         {
@@ -177,7 +213,7 @@ namespace TorchFlow
             const uint VK_SPACE = 0x20;           
             if (!RegisterHotKey(helper.Handle, HOTKEY_ID, MOD_CONTROL, VK_SPACE))
             {
-
+                
             }
         }
 
@@ -209,8 +245,8 @@ namespace TorchFlow
         private void OnHotKeyPressed()                                                              // When pressed a key
         {           
            if (isopened == 0)                                                                       // If the application is in background mode
-           {
-                this.Show();
+           {                
+                this.Visibility = Visibility.Visible;
                 isopened = 1;
            }
    
@@ -220,19 +256,27 @@ namespace TorchFlow
 
         private void Window_KeyDown(object sender, KeyEventArgs e)                           
         {
+            if (Keyboard.IsKeyDown(Key.Escape))                                                     // Keys ESC
+            {
+                isopened = 0;                                                                       // Set isopened to 0 (Hide application)               
+                this.Visibility = Visibility.Hidden;                                                // Hide Application              
+            }
 
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))                  // Keys CTRL + SPACE
-            {                                                                         
-                isopened = 0;                                                                       // Set isopened to 0 (Hide application)
-                App.Current.MainWindow.Hide();                                                      // Hide Application              
-            }                                                                         
-            
-            if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)                        // Is Alt key pressed
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)                // Is Alt key pressed
+            {
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))              // Keys ALT + F4
+                {
+                    isopened = 0;                                                                   // Set isopened to 0 (Hide application)                  
+                    this.Visibility = Visibility.Hidden;                                            // Hide Application              
+                }
+            }
+
+            if((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)                         // Is Alt key pressed
             {
                 if (Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.F4))                  // Keys ALT + F4
                 {
                     isopened = 0;                                                                   // Set isopened to 0 (Hide application)
-                    App.Current.MainWindow.Hide();                                                  // Hide Application              
+                    this.Visibility = Visibility.Hidden;                                            // Hide Application              
                 }
             }
 
@@ -249,9 +293,7 @@ namespace TorchFlow
         private void search_button_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        
+        }        
 
         public void Window_Closing(object sender, CancelEventArgs e)
         {
@@ -266,6 +308,7 @@ namespace TorchFlow
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
         {
             work();                                                                                 // generate the tootips
+            
         }
 
         void work ()
@@ -273,12 +316,14 @@ namespace TorchFlow
             Command output = new Command();
             output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);           // process the input
 
+            string contenttext = "", contentimage = "";
+                        
             switch (output.ID)                                                                      // search block by id
             {
                 case "-1":                                                                          // search on google
                     output.Args = textbox_search.Text;                                              // required to avoid word-removal
                     if (output.Args.Length > 0)
-                        Commands.SearchOnGoogle(output, enter);                                     // this block is called if the user does not enter an args
+                        contenttext = Commands.SearchOnGoogle(output, enter);                       // this block is called if the user does not enter an args
                     break;
 
                 case "00":                                                                          // search on google
@@ -286,31 +331,45 @@ namespace TorchFlow
                     break;
 
                 case "01":                                                                          // search on google
-                    Commands.SearchOnGoogle(output, enter);
+                      contenttext = Commands.SearchOnGoogle(output, enter);
+                      
                     break;
 
                 case "02":                                                                          // search on youtube
-                    Commands.SearchOnYoutube(output, enter);
+                    contenttext = Commands.SearchOnYoutube(output, enter);
                     break;
 
                 case "03":                                                                          // search on youtube music
-                    Commands.SearchOnYoutubeMusic(output, enter);
+                    contenttext = Commands.SearchOnYoutubeMusic(output, enter);
                     break;
 
                 case "04":                                                                          // search on maps
-                    Commands.SearchOnMaps(output, enter);
+                    contenttext = Commands.SearchOnMaps(output, enter);
                     break;
 
                 case "05":                                                                          // execute cmd
-                    Commands.WindowsCmd(output, enter);
+                    contenttext = Commands.WindowsCmd(output, enter);
+                    break;
+
+                case "06":                                                                          // execute cmd
+                    contenttext = Commands.ProgramFirefox(output, enter);
                     break;
 
                 default:                                                                            // something went wrong
                     break;
             }
+            AddSearchToolTip(contenttext, contentimage);
 
-            if(enter)                                                                               // if the user type enter 
-                this.Hide();                                                                        // hide the form            
+            if (enter)
+            {                                                                                       // if the user type enter 
+                this.Hide();                                                                        // hide the form
+                isopened = 0;
+            }
+            if (textbox_search.Text.Length == 0)
+            {
+                RemoveAllSearchToolTip();
+
+            }
         }
         
         public void OnKeyDownHandler(object sender, KeyEventArgs e)
@@ -321,13 +380,17 @@ namespace TorchFlow
                 work();                                                                             // 
                 enter = false;                                                                      // disable the start to search
                 textbox_search.Text = "";                                                           // clear text
+                RemoveAllSearchToolTip();
+
             }
             
         }
 
-        private void labeltitle_Loaded(object sender, RoutedEventArgs e)
+        private void search_tab_border_Loaded(object sender, RoutedEventArgs e)
         {
-
+            Command output = new Command();
+            output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);           // process the input
+            
         }
     }
 }

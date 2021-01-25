@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="TorchFlow.UserSearchToolTip"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TorchFlow"
+             mc:Ignorable="d" d:DesignWidth="800" Height="49"
+             Background="Transparent">
+    <Grid Margin="0,0,0,245">
+        <Image Name="imagepath1" HorizontalAlignment="Left" Height="36" Margin="10,6,0,-42" VerticalAlignment="Top" Width="36" Source="youtube.png" >
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="youtube.png"/>
+            </Image.OpacityMask>
+        </Image>
+        <Label FontFamily="Ubuntu" FontSize="30" VerticalAlignment="Center" Foreground="White" Name="ContentLabel" Content="ContentLabel" HorizontalAlignment="Left" Height="47"  Width="668" Margin="51,0,0,-47"/>
+        <StackPanel HorizontalAlignment="Left" Height="0" Margin="200,325,0,-325" VerticalAlignment="Top" Width="100"/>
+
+    </Grid>
+</UserControl>
