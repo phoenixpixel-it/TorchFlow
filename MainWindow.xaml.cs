@@ -156,6 +156,7 @@ namespace TorchFlow
             search_tab.Children.Add(listtooltip[i]);
             if(i > 0)            
                 search_tab_border.Visibility = Visibility.Visible;
+            else            
                 search_tab_border.Visibility = Visibility.Hidden;           
             
         }
