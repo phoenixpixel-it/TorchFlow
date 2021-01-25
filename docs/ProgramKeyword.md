@@ -1,3 +1,5 @@
+## 📝 Commands list
+
 ex				search on files
 gg				search on google
 yt				search on youtube

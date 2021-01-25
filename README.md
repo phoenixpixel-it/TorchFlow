@@ -95,7 +95,7 @@ to start a search immediately.
 
 ## 🚀 Commands <a name = "commands"></a>
 
-For a full list of commands available look [docs](https://github.com/phoenixpixel-it/TorchFlow/blob/main/docs/Program%20Keyword.txt)
+For a full list of commands available look [docs](https://github.com/phoenixpixel-it/TorchFlow/blob/main/docs/ProgramKeyword.md)
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
