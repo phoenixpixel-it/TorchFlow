@@ -187,19 +187,51 @@ namespace TorchFlow
         public static string ProgramFirefox (Command inputcommand, bool exec = false)                                                           // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
-            {                                                                                                                               // start cmd
-                System.Diagnostics.Process process = new System.Diagnostics.Process();
-                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                startInfo.FileName = "firefox.exe";
-                startInfo.Arguments = inputcommand.Args;
-                process.StartInfo = startInfo;
-                process.Start();
+            {    try
+                {
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.FileName = "firefox.exe";
+                    startInfo.Arguments = inputcommand.Args;
+                    process.StartInfo = startInfo;
+                    process.Start();
+                }
+                catch {
+                    MessageBox.Show("Firefox not found");
+                }                                                                                                                           // start cmd
+                
             }
             if (inputcommand.Args != "")
-                return "Execute on Firefox: " + inputcommand.Args;                                                                              // text of the tooltips
+                return "Execute on Firefox: " + inputcommand.Args;                                                                          // text of the tooltips
             else
                 return "";
 
         }
+        public static string ProgramChrome(Command inputcommand, bool exec = false)                                                           // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+            {
+                try
+                {
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.FileName = "chrome.exe";
+                    startInfo.Arguments = inputcommand.Args;
+                    process.StartInfo = startInfo;
+                    process.Start();
+                }
+                catch
+                {
+                    MessageBox.Show("Chrome not found");
+                }                                                                                                                           // start cmd
+
+            }
+            if (inputcommand.Args != "")
+                return "Execute on Chrome: " + inputcommand.Args;                                                                          // text of the tooltips
+            else
+                return "";
+
+        }
+
     } 
 }

@@ -29,6 +29,7 @@
 - [Getting Started](#getting_started)
 - [Deployment](#deployment)
 - [Usage](#usage)
+- [Commands](#commands)
 - [Built Using](#built_using)
 - [TODO](../TODO.md)
 - [Contributing](../CONTRIBUTING.md)
@@ -91,6 +92,10 @@ to start a search immediately.
 <p align="center">
 <img src="https://i.imgur.com/GREyt6V.png" alt="TorchFlow Usage">
 </p>
+
+## 🚀 Commands <a name = "commands"></a>
+
+For a full list of commands available look [docs](https://github.com/phoenixpixel-it/TorchFlow/blob/main/docs/Program%20Keyword.txt)
 
 ## 🚀 Deployment <a name = "deployment"></a>
 

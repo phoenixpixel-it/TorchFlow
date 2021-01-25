@@ -23,7 +23,14 @@ namespace TorchFlow
         public static extern void SetWindowText(int hWnd, String text);
         public const int MOD_ALT = 0x12;                                                            // Alt key
         public const int VK_SPACE = 0x20;                                                           // Space key
-        bool enter = false;
+        private HwndSource _source;                                                                 // Set GlobalHotKey Source
+        private const int HOTKEY_ID = 9000;                                                         // Set GlobalHotKey ID
+
+        bool enter = false;                                                                         // if the user press enter
+        const int search_tab_visible = 49;                                                          // Set search_tab on "Hidden"
+        public int isopened;                                                                        // Create int "Is Opened", understand if the window is open or closed        
+        UserSearchToolTip[] listtooltip = new UserSearchToolTip[0];                                 // custom control
+
 
 
         [DllImport("User32.dll")]                                                                   // Import user32.dll for Global Shortcuts
@@ -38,8 +45,7 @@ namespace TorchFlow
             [In] IntPtr hWnd,
             [In] int id);
 
-        private HwndSource _source;                                                                 // Set GlobalHotKey Source
-        private const int HOTKEY_ID = 9000;                                                         // Set GlobalHotKey ID
+        
 
         public void ResizeWindow()
         {
@@ -140,7 +146,7 @@ namespace TorchFlow
 
         public string backgtext { get; private set; }                                               // Search string value
 
-        const int search_tab_visible = 49;                                                          // Set search_tab on "Hidden" 
+        
         void AddSearchToolTip(string text, string pathimage)
         {
             search_tab.Children.Clear();
@@ -169,9 +175,9 @@ namespace TorchFlow
             search_tab_border.Height = search_tab_visible;
             search_tab.Children.Clear();
         }
-        UserSearchToolTip[] listtooltip = new UserSearchToolTip[0];
         
-        public int isopened;                                                                        // Create int "Is Opened", understand if the window is open or closed        
+        
+        
         public MainWindow()
         {
             isopened = 1;                                                                           // Set Isopened to true
@@ -309,7 +315,6 @@ namespace TorchFlow
         private void textbox_search_TextChanged(object sender, TextChangedEventArgs e)
         {
             work();                                                                                 // generate the tootips
-            
         }
 
         void work ()
@@ -333,7 +338,6 @@ namespace TorchFlow
 
                 case "01":                                                                          // search on google
                       contenttext = Commands.SearchOnGoogle(output, enter);
-                      
                     break;
 
                 case "02":                                                                          // search on youtube
@@ -354,6 +358,10 @@ namespace TorchFlow
 
                 case "06":                                                                          // execute cmd
                     contenttext = Commands.ProgramFirefox(output, enter);
+                    break;
+
+                case "07":
+                    contenttext = Commands.ProgramChrome(output, enter);                        
                     break;
 
                 default:                                                                            // something went wrong
@@ -391,7 +399,6 @@ namespace TorchFlow
         {
             Command output = new Command();
             output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);           // process the input
-            
         }
     }
 }
