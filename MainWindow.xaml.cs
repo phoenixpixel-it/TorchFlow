@@ -337,7 +337,7 @@ namespace TorchFlow
                     break;
 
                 case "01":                                                                          // search on google
-                      contenttext = Commands.SearchOnGoogle(output, enter);
+                    contenttext = Commands.SearchOnGoogle(output, enter);
                     break;
 
                 case "02":                                                                          // search on youtube
@@ -356,12 +356,24 @@ namespace TorchFlow
                     contenttext = Commands.WindowsCmd(output, enter);
                     break;
 
-                case "06":                                                                          // execute cmd
+                case "06":                                                                          // search with firefox
                     contenttext = Commands.ProgramFirefox(output, enter);
                     break;
 
-                case "07":
+                case "07":                                                                          // search with chrome
                     contenttext = Commands.ProgramChrome(output, enter);                        
+                    break;
+
+                case "08":                                                                          // open notepad++
+                    contenttext = Commands.ProgramNotepadPlus(output, enter);
+                    break;
+
+                case "09":                                                                          // open discord
+                    contenttext = Commands.ProgramDiscord(output, enter);
+                    break;
+
+                case "10":                                                                          // open visualstudio
+                    contenttext = Commands.ProgramVisualstudio(output, enter);
                     break;
 
                 default:                                                                            // something went wrong

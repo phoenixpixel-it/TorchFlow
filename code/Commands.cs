@@ -207,7 +207,8 @@ namespace TorchFlow
                 return "";
 
         }
-        public static string ProgramChrome(Command inputcommand, bool exec = false)                                                           // ############## Luke_Screwdriver ##############
+
+        public static string ProgramChrome(Command inputcommand, bool exec = false)                                                         // ############## Luke_Screwdriver ##############
         {
             if (exec == true)
             {
@@ -228,6 +229,81 @@ namespace TorchFlow
             }
             if (inputcommand.Args != "")
                 return "Search on Chrome: " + inputcommand.Args;                                                                          // text of the tooltips
+            else
+                return "";
+
+        }
+
+        public static string ProgramNotepadPlus (Command inputcommand, bool exec = false)                                                   // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+            {
+                try
+                {
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.FileName = "notepad++.exe";
+                    process.StartInfo = startInfo;
+                    process.Start();
+                }
+                catch
+                {
+                    MessageBox.Show("Notepad++ not found");
+                }                                                                                                                           // start cmd
+
+            }
+            if (inputcommand.Args != "")
+                return "Open Notepad++";                                                                                                    // text of the tooltips
+            else
+                return "";
+
+        }
+
+        public static string ProgramDiscord (Command inputcommand, bool exec = false)                                                       // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+            {
+                try
+                {
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.FileName = "C:\\Users\\"+Environment.UserName+ "\\AppData\\Local\\Discord\\app-0.0.309\\Discord.exe";
+                    process.StartInfo = startInfo;
+                    process.Start();
+                }
+                catch
+                {
+                    MessageBox.Show("Discord not found");
+                }                                                                                                                           // start cmd
+
+            }
+            if (inputcommand.Args != "")
+                return "Open Discord";                                                                                                      // text of the tooltips
+            else
+                return "";
+
+        }
+
+        public static string ProgramVisualstudio (Command inputcommand, bool exec = false)                                                  // ############## Luke_Screwdriver ##############
+        {
+            if (exec == true)
+            {
+                try
+                {
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.FileName = "devenv.exe";
+                    process.StartInfo = startInfo;
+                    process.Start();
+                }
+                catch
+                {
+                    MessageBox.Show("Visual Studio not found");
+                }                                                                                                                           // start cmd
+
+            }
+            if (inputcommand.Args != "")
+                return "Open Visual Studio";                                                                          // text of the tooltips
             else
                 return "";
 

@@ -1,12 +1,13 @@
 ## 📝 Commands list
 
 ```console
-- ex				search on files
-- gg				search on google
-- yt				search on youtube
-- ytm				search on youtube music
-- mp				search on maps
-- cmd				execute command on cmd
-- frf				open firefox
-- chr				open chrome
+- ex				Search on files
+- gg				Search on Google
+- yt				Search on Youtube
+- ytm				Search on Youtube Music
+- mp				Search on Maps
+- cmd				Execute command on cmd
+- frf				Search with Firefox
+- chr				Search with Chrome
+- npp				Open Notepad++
 ```

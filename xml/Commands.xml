@@ -42,5 +42,21 @@
     <ID>07</ID>
     <Name>chr</Name>
   </Command>
+  
+  <Command>
+    <ID>08</ID>
+    <Name>npp</Name>
+  </Command>
+
+  <Command>
+    <ID>09</ID>
+    <Name>ds</Name>
+  </Command>
+
+  <Command>
+    <ID>10</ID>
+    <Name>vs</Name>
+  </Command>
+
 
 </Commands>
