@@ -10,4 +10,6 @@
 - frf				Search with Firefox
 - chr				Search with Chrome
 - npp				Open Notepad++
+- ds				Open Discord
+- vs				Open Visual Studio
 ```
