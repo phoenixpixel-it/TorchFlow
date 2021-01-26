@@ -9,6 +9,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
+using System.Reflection;
 
 namespace TorchFlow
 {
@@ -147,7 +148,7 @@ namespace TorchFlow
         public string backgtext { get; private set; }                                               // Search string value
 
         
-        void AddSearchToolTip(string text, string pathimage)
+        void AddSearchToolTip(string text, BitmapImage image)
         {
             search_tab.Children.Clear();
             if (text.Length > 0)
@@ -157,8 +158,8 @@ namespace TorchFlow
                 listtooltip[i] = new UserSearchToolTip();
                 listtooltip[i].ContentLabel.Content = text;
 
-                if (pathimage != "")
-                    listtooltip[i].imagepath1.Source = new BitmapImage(new Uri(pathimage));
+                //if (pathimage != "")
+                    listtooltip[i].imagepath1.Source = image;//new BitmapImage(new Uri(pathimage));
 
                 search_tab_border.Height = search_tab_visible;
                 search_tab.Children.Add(listtooltip[i]);
@@ -322,14 +323,18 @@ namespace TorchFlow
             Command output = new Command();
             output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);           // process the input
 
-            string contenttext = "", contentimage = "";
+            string contenttext = "";
+            BitmapImage contentimage=new BitmapImage();
                         
             switch (output.ID)                                                                      // search block by id
             {
                 case "-1":                                                                          // search on google
                     output.Args = textbox_search.Text;                                              // required to avoid word-removal
                     if (output.Args.Length > 0)
+                    {
                         contenttext = Commands.SearchOnGoogle(output, enter);                       // this block is called if the user does not enter an args
+                        contentimage = LoadBitmapFromResource("icon/google.png");
+                    }
                     break;
 
                 case "00":                                                                          // search on google
@@ -338,42 +343,52 @@ namespace TorchFlow
 
                 case "01":                                                                          // search on google
                     contenttext = Commands.SearchOnGoogle(output, enter);
+                    contentimage = LoadBitmapFromResource("icon/google.png");
                     break;
 
                 case "02":                                                                          // search on youtube
                     contenttext = Commands.SearchOnYoutube(output, enter);
+                    contentimage = LoadBitmapFromResource("icon/youtube.png");
                     break;
 
                 case "03":                                                                          // search on youtube music
                     contenttext = Commands.SearchOnYoutubeMusic(output, enter);
+                    contentimage = LoadBitmapFromResource("icon/yt_music.png");
                     break;
 
                 case "04":                                                                          // search on maps
                     contenttext = Commands.SearchOnMaps(output, enter);
+                    contentimage = LoadBitmapFromResource("icon/maps.png");
                     break;
 
                 case "05":                                                                          // execute cmd
                     contenttext = Commands.WindowsCmd(output, enter);
+                    contentimage = LoadBitmapFromResource("icon/windows_cmd.png");
                     break;
 
                 case "06":                                                                          // search with firefox
                     contenttext = Commands.ProgramFirefox(output, enter);
+                    contentimage = LoadBitmapFromResource("icon/firefox.png");
                     break;
 
                 case "07":                                                                          // search with chrome
-                    contenttext = Commands.ProgramChrome(output, enter);                        
+                    contenttext = Commands.ProgramChrome(output, enter);
+                    contentimage = LoadBitmapFromResource("icon/chrome.png");
                     break;
 
                 case "08":                                                                          // open notepad++
                     contenttext = Commands.ProgramNotepadPlus(output, enter);
+                    contentimage = LoadBitmapFromResource("icon/notepad_plus_plus.png");
                     break;
 
                 case "09":                                                                          // open discord
                     contenttext = Commands.ProgramDiscord(output, enter);
+                    contentimage = LoadBitmapFromResource("icon/discord.png");
                     break;
 
                 case "10":                                                                          // open visualstudio
                     contenttext = Commands.ProgramVisualstudio(output, enter);
+                    contentimage = LoadBitmapFromResource("icon/visual_studio.png");
                     break;
 
                 default:                                                                            // something went wrong
@@ -408,6 +423,20 @@ namespace TorchFlow
         {
             Command output = new Command();
             output = Commands.analysis_input(Commands.CommandsList, textbox_search.Text);           // process the input
+        }
+
+        public static BitmapImage LoadBitmapFromResource (string pathInApplication, Assembly assembly = null)
+        {
+            if (assembly == null)
+            {
+                assembly = Assembly.GetCallingAssembly();
+            }
+
+            if (pathInApplication[0] == '/')
+            {
+                pathInApplication = pathInApplication.Substring(1);
+            }
+            return new BitmapImage(new Uri(@"pack://application:,,,/" + assembly.GetName().Name + ";component/" + pathInApplication, UriKind.Absolute));
         }
     }
 }

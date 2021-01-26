@@ -255,7 +255,7 @@ namespace TorchFlow
             if (inputcommand.Args != "")
                 return "Open Notepad++";                                                                                                    // text of the tooltips
             else
-                return "";
+                return "Open Notepad++";
 
         }
 
@@ -280,7 +280,7 @@ namespace TorchFlow
             if (inputcommand.Args != "")
                 return "Open Discord";                                                                                                      // text of the tooltips
             else
-                return "";
+                return "Open Discord";
 
         }
 
@@ -305,7 +305,7 @@ namespace TorchFlow
             if (inputcommand.Args != "")
                 return "Open Visual Studio";                                                                          // text of the tooltips
             else
-                return "";
+                return "Open Visual Studio";
 
         }
 
