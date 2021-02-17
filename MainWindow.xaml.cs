@@ -127,11 +127,7 @@ namespace TorchFlow
         private void OpenFinder(object sender, EventArgs e)                                         // Open Finder in application bar
         {
             this.Visibility = Visibility.Visible;
-            //TextBox Search
-            backgtext = "Write here to search...";                                                  // Background text textbox_search
-            textbox_search.Foreground = Brushes.Gray;                                               // Add Background color text
-            textbox_search.Text = backgtext;                                                        // Add Background Text
-
+            isopened = 1;            
         }
 
         private void OpenDashboard(object sender, EventArgs e)                                      // Open Dashboard in application bar
@@ -197,7 +193,7 @@ namespace TorchFlow
 
             Commands.FixCommands();
             Commands.LoadCommands();
-                       
+            RemoveAllSearchToolTip();
         }
 
         protected override void OnSourceInitialized(EventArgs e)                                    // On Source Initialized | GlobalHotKeys
@@ -254,16 +250,21 @@ namespace TorchFlow
 
         private void OnHotKeyPressed()                                                              // When pressed a key
         {           
-           if (isopened == 0)                                                                       // If the application is in background mode
-           {                
+            if (isopened == 0)                                                                      // If the application is in background mode
+            {
                 this.Visibility = Visibility.Visible;
+                //TextBox Search
                 isopened = 1;
-           }
-   
+                textbox_search.Clear();
+            }
+
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)                           
         {
+            textbox_search.Focus();                                                                 // Click Textbox 
+            
+
             if (Keyboard.IsKeyDown(Key.Escape))                                                     // Keys ESC
             {
                 isopened = 0;                                                                       // Set isopened to 0 (Hide application)               
@@ -287,14 +288,13 @@ namespace TorchFlow
                     this.Visibility = Visibility.Hidden;                                            // Hide Application              
                 }
             }
-
-            textbox_search.Foreground = Brushes.White;                                              // Set textbox color to white
-            backgtext = "";                                                                         // Set background text to ""
-            textbox_search.Focus();                                                                 // Click Textbox 
+            
+            
             
         }
         private void textbox_search_GotFocus(object sender, RoutedEventArgs e)
         {
+            textbox_search.Foreground = Brushes.White;                                              // Set textbox color to white
             textbox_search.Text = "";                                                               // Set Textbox_search to ""
         }
 
@@ -437,6 +437,11 @@ namespace TorchFlow
                 pathInApplication = pathInApplication.Substring(1);
             }
             return new BitmapImage(new Uri(@"pack://application:,,,/" + assembly.GetName().Name + ";component/" + pathInApplication, UriKind.Absolute));
+        }
+
+        private void textbox_search_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
         }
     }
 }

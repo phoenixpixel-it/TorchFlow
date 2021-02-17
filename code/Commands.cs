@@ -87,18 +87,25 @@ namespace TorchFlow
         {                                                                                                                                   // RETURN ==> the value to send at the block
             Command result = new Command();                                                                                                 // Create the result container
             String[] words = input_search_box.Split(' ');                                                                                   // make an array of string splitted by space char
+            int cmdpos = -1;
+            for (int s = 0; s < words.Length; s++)
+                if (words[s].Contains("-"))
+                    cmdpos = s;
+
+                    
+            if(cmdpos>=0)
             for (int a = 0; a < list_command.Count; a++)                                                                                    // 
             {
-                if (words[0].Length == 0)
+                if (words[cmdpos].Length == 0)
                     return result;                                                                                                          // output null
-                if (words[0] == list_command[a].Cmd)                                                                                        // if the word correspond to the first arg
+                if (words[cmdpos] == "-"+list_command[a].Cmd)                                                                                        // if the word correspond to the first arg
                 {
                     result.ID = list_command[a].ID;                                                                                        // set num block
-					result.Cmd = words[0];                                                                                                  // set the cmd
+					result.Cmd = words[cmdpos];                                                                                                  // set the cmd
                     if(input_search_box.Contains(words[0] + " "))
-                        result.Args = input_search_box.Replace(words[0] + " ", "");                                                         // set the arguments
+                        result.Args = input_search_box.Replace(words[cmdpos] + " ", "");                                                         // set the arguments
                     else
-                        result.Args = input_search_box.Replace(words[0], "");                                                               // set the arguments
+                        result.Args = input_search_box.Replace(words[cmdpos], "");                                                               // set the arguments
                 }
             }
             return result;                                                                                                                  // output is a block that contain info(block_num,args);                                                                                                                                           // return -1 if didn't find the block 
@@ -217,7 +224,7 @@ namespace TorchFlow
                     System.Diagnostics.Process process = new System.Diagnostics.Process();
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                     startInfo.FileName = "chrome.exe";
-                    startInfo.Arguments = inputcommand.Args;
+                    startInfo.Arguments = "--search \""+ inputcommand.Args +"\"";
                     process.StartInfo = startInfo;
                     process.Start();
                 }
@@ -309,5 +316,30 @@ namespace TorchFlow
 
         }
 
+
+        public static string SearchOnWindows (Command inputcommand, bool exec = false)
+        {
+            //foreach (string s in Directory.GetLogicalDrives())
+            //{
+            //    if (list.Count == 0)
+            //    {
+            //        foreach (string f in Directory.EnumerateFiles(s, file, SerchOption.AllDirectories))
+            //        {
+            //            try
+            //            {
+            //                textBox2.Text = f;
+            //                list.Add(f);
+            //            }
+            //            catch (System.Exception excpt)
+            //            {
+            //                Console.WriteLine(excpt.Message);
+            //            }
+
+            //        }
+            //    }
+            //}
+
+            return "";
+        }
     } 
 }

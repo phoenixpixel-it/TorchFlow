@@ -102,7 +102,7 @@
                 </Separator.RenderTransform>
             </Separator>
 
-            <TextBox x:Name="textbox_search" Style="{DynamicResource Ubuntu}" HorizontalAlignment="Left" Height="24" Margin="94,18,0,0" VerticalAlignment="Top" Width="654" Background="Transparent" FontFamily="Ubuntu" TextWrapping="Wrap" FontSize="20" Foreground="#FFEAEAEA" BorderBrush="Transparent" BorderThickness="0" GotFocus="textbox_search_GotFocus" SelectionBrush="RoyalBlue" Cursor="IBeam" UseLayoutRounding="True" CaretBrush="White" KeyDown="OnKeyDownHandler" TextChanged="textbox_search_TextChanged">
+            <TextBox x:Name="textbox_search" Style="{DynamicResource Ubuntu}" HorizontalAlignment="Left" Height="24" Margin="94,18,0,0" VerticalAlignment="Top" Width="654" Background="Transparent" FontFamily="Ubuntu" TextWrapping="Wrap" FontSize="20" Foreground="#FFEAEAEA" BorderBrush="Transparent" BorderThickness="0" GotFocus="textbox_search_GotFocus" SelectionBrush="RoyalBlue" Cursor="IBeam" UseLayoutRounding="True" CaretBrush="White" KeyDown="OnKeyDownHandler" TextChanged="textbox_search_TextChanged" PreviewTextInput="textbox_search_PreviewTextInput">
 
             </TextBox>
 
