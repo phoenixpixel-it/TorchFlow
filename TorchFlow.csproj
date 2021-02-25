@@ -79,6 +79,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="code\GetXMLConfig.cs" />
+    <Compile Include="code\Python.cs" />
     <Compile Include="UserSearchToolTip.xaml.cs">
       <DependentUpon>UserSearchToolTip.xaml</DependentUpon>
     </Compile>
