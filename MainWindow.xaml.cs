@@ -18,8 +18,9 @@ namespace TorchFlow
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-        
+
+        public static RoutedCommand TorchFlow_Hide = new RoutedCommand();                           // Command shortcut - Hide application
+
         [System.Runtime.InteropServices.DllImport("user32.dll")]                                    // Import user32.dll
         public static extern void SetWindowText(int hWnd, String text);
         public const int MOD_ALT = 0x12;                                                            // Alt key
@@ -55,7 +56,7 @@ namespace TorchFlow
             int main_window_width = 820;                                                            // Resize Main Window Width
 
             
-            border_search.Width = main_window_width;                                                //Resize MainWindow Width           
+            border_search.Width = main_window_width;                                                // Resize MainWindow Width           
             int border_search_height = 60;
             border_search.Width = main_window_width;                                                // Resize SearchBar Width
             border_search.Height = border_search_height;                                            // Resize SearchBar Height
@@ -69,8 +70,8 @@ namespace TorchFlow
             search_button.Margin = new Thickness(0, 10, button_search_margin_right, 10);            // Resize Search Button margins
 
 
-            search_tab_border.Width = main_window_width;                                                   // Set search tab results Width
-            search_tab_border.Height = 230;                                                                // Set search tab results Width
+            search_tab_border.Width = main_window_width;                                            // Set search tab results Width
+            search_tab_border.Height = 230;                                                         // Set search tab results Width
 
             search_tab_border.Visibility = Visibility.Hidden;
         }
@@ -94,7 +95,7 @@ namespace TorchFlow
 
                         /*
                          * 
-                         *  code to isntall extension
+                         *  code to install extension
                          * 
                          */
                     }
@@ -168,7 +169,7 @@ namespace TorchFlow
                 search_tab_border.Visibility = Visibility.Hidden;
 
         }
-
+        
         void RemoveAllSearchToolTip()
         {
             
@@ -259,7 +260,11 @@ namespace TorchFlow
             }
 
         }
-
+        private void TorchFlow_Hide_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            isopened = 0;                                                                       // Set isopened to 0 (Hide application)               
+            this.Visibility = Visibility.Hidden;                                                // Hide Application 
+        }
         private void Window_KeyDown(object sender, KeyEventArgs e)                           
         {
             textbox_search.Focus();                                                                 // Click Textbox 
@@ -271,26 +276,22 @@ namespace TorchFlow
                 this.Visibility = Visibility.Hidden;                                                // Hide Application              
             }
 
-            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)                // Is Alt key pressed
+            
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))                  // Keys ALT + F4
             {
-                if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Space))              // Keys ALT + F4
-                {
-                    isopened = 0;                                                                   // Set isopened to 0 (Hide application)                  
-                    this.Visibility = Visibility.Hidden;                                            // Hide Application              
-                }
+                isopened = 0;                                                                       // Set isopened to 0 (Hide application)                  
+                this.Visibility = Visibility.Hidden;                                                // Hide Application              
             }
 
-            if((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)                         // Is Alt key pressed
+            TorchFlow_Hide.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+
+
+            if (Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.F4))                      // Keys ALT + F4
             {
-                if (Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.F4))                  // Keys ALT + F4
-                {
-                    isopened = 0;                                                                   // Set isopened to 0 (Hide application)
-                    this.Visibility = Visibility.Hidden;                                            // Hide Application              
-                }
+                isopened = 0;                                                                       // Set isopened to 0 (Hide application)
+                this.Visibility = Visibility.Hidden;                                                // Hide Application              
             }
-            
-            
-            
+                     
         }
         private void textbox_search_GotFocus(object sender, RoutedEventArgs e)
         {

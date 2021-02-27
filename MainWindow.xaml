@@ -20,8 +20,13 @@
     <Window.Background>
         <SolidColorBrush Opacity="0.4" Color="Black"/>
     </Window.Background>
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.TorchFlow_Hide}" Executed="TorchFlow_Hide_Executed"/>
+    </Window.CommandBindings>
 
-    <Border x:Name="border_search" Height="61" CornerRadius="20" Background="#FF1F1F1F" >
+
+    <Border x:Name="border_search" Height="61" CornerRadius="25" Background="#FF1F1F1F" >
 
         <Grid>
             <Grid.RowDefinitions>
