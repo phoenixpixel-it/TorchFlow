@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="code\Ext.cs" />
     <Compile Include="code\GetXMLConfig.cs" />
     <Compile Include="code\Python.cs" />
     <Compile Include="UserSearchToolTip.xaml.cs">
@@ -135,6 +136,9 @@
     <Resource Include="assets\fonts\Ubuntu-Medium.ttf" />
     <Resource Include="assets\fonts\Ubuntu-MediumItalic.ttf" />
     <Resource Include="assets\fonts\Ubuntu-Regular.ttf" />
+    <None Include="ext_test\test.tfs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

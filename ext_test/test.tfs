@@ -1,0 +1,4 @@
+﻿// "Sto coso avvia l'esplora risorse";
+// "Questo è un commento";
+
+Start "C:\Windows\Explorer.exe";
