@@ -7,12 +7,23 @@
              mc:Ignorable="d" d:DesignWidth="800" Height="49"
              Background="Transparent">
     <Grid Margin="0,0,0,245">
-        <Image Name="imagepath1" HorizontalAlignment="Left" Height="36" Margin="10,6,0,-42" VerticalAlignment="Top" Width="36" Source="Icon/youtube.png" >
+        <Image Name="imagepath1" HorizontalAlignment="Left" Height="25" Margin="35,12,0,-37" VerticalAlignment="Top" Width="24" Source="Icon/youtube.png" >
             <Image.OpacityMask>
                 <ImageBrush ImageSource="Icon/youtube.png"/>
             </Image.OpacityMask>
         </Image>
-        <Label FontFamily="Ubuntu" FontSize="30" VerticalAlignment="Center" Foreground="White" Name="ContentLabel" Content="ContentLabel" HorizontalAlignment="Left" Height="47"  Width="668" Margin="51,0,0,-47"/>
+        <Separator x:Name="separator" HorizontalAlignment="Left" Height="8" Margin="64,20,0,-28" VerticalAlignment="Top" Width="26" RenderTransformOrigin="0.5,0.5" Background="#C9C9C9">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+
+        <Label Style="{DynamicResource Ubuntu}" FontFamily="Ubuntu" FontSize="20" VerticalAlignment="Center" Foreground="White" Name="ContentLabel" Content="ContentLabel" HorizontalAlignment="Left" Height="47"  Width="668" Margin="88,7,0,-54"/>
         <StackPanel HorizontalAlignment="Left" Height="0" Margin="200,325,0,-325" VerticalAlignment="Top" Width="100"/>
 
     </Grid>

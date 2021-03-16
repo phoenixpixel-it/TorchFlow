@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
-namespace TorchFlow.code
+namespace TorchFlow
 {
-    class Ext
+    public class Ext
     {
-        static bool RunScript(string FileName)
+        public static bool RunScript(string FileName)
         {
             // RunScript(string FileName)
             string[] FileText = null;
@@ -21,19 +21,20 @@ namespace TorchFlow.code
             {
                 // true
                 return false;
-            }
-
-
-            try
+            } 
+            else
             {
-                // try
-                FileText = File.ReadAllLines(FileName);
-            }
-            catch (Exception Exception)
-            {
-                // catch
-                Debug.WriteLine(Exception.Message);
-                return false;
+                // false
+                try
+                {
+                    // try
+                    FileText = File.ReadAllLines(FileName);
+                }
+                catch
+                {
+                    // catch
+                    return false;
+                }
             }
 
 
@@ -134,10 +135,9 @@ namespace TorchFlow.code
                             continue;
                     }
                 }
-                catch (Exception Exception)
+                catch
                 {
                     // catch
-                    Console.WriteLine(Exception.Message);
                     return false;
                 }
             }
